@@ -1,6 +1,4 @@
-//
-//  NivelDetalleView.swift
-//
+
 
 import SwiftUI
 
@@ -9,26 +7,23 @@ struct NivelDetalleView: View {
     let nivelNumero: Int
     
     var body: some View {
-        // ZStack con el fondo naranja y las frutas
         ZStack {
             Color(red: 252/255, green: 172/255, blue: 80/255)
                 .edgesIgnoringSafeArea(.all)
             
-            FruitOverlayView() // Las frutas de fondo
+            FruitOverlayView()
                 .allowsHitTesting(false)
             
-            // VStack solo con el contenido del nivel
             VStack(spacing: 20) {
                 
-                Spacer() // Espacio para que baje el contenido
+                Spacer()
                 
-                Image("cmicapet") // El nombre de tu mascota
+                Image("cmicapet")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 280, height: 280)
                     .offset(x: 15)
                 
-                // Link para ir al juego
                 NavigationLink(destination: JuegoView()) {
                     Text("Jugar")
                         .font(.title2).fontWeight(.bold).foregroundColor(.black)
@@ -38,7 +33,6 @@ struct NivelDetalleView: View {
                         .shadow(color: .black.opacity(0.2), radius: 5, y: 5)
                 }
                 
-                // El número del nivel
                 Text("\(nivelNumero)")
                     .font(.title)
                     .fontWeight(.bold)
@@ -61,7 +55,7 @@ struct NivelDetalleView: View {
     }
 }
 
-// (La vista de las frutas debe estar aquí abajo)
+//
 struct FruitOverlayView: View {
     var body: some View {
         GeometryReader { geo in
