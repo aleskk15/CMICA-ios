@@ -1,3 +1,10 @@
+//
+//  NivelesView.swift
+//  CMICAswift
+//
+//  Created by Alumno on 02/11/25.
+//
+
 import SwiftUI
 
 struct NivelesView: View {
@@ -6,7 +13,7 @@ struct NivelesView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-             
+            
             HStack {
                 Button(action: {
                     self.presentationMode.wrappedValue.dismiss()
@@ -36,15 +43,26 @@ struct NivelesView: View {
             .padding(.bottom, 10)
             .background(Color(red: 252/255, green: 172/255, blue: 80/255))
 
-            TabView {
-                ForEach(1...10, id: \.self) { numero in
-                    NivelDetalleView(nivelNumero: numero)
+            GeometryReader { geometry in
+                
+                ScrollView(.vertical) {
+                    
+                    VStack(spacing: 0) {
+                        ForEach(1...10, id: \.self) { numero in
+                            NivelDetalleView(nivelNumero: numero)
+                                .frame(height: geometry.size.height)
+                        }
+                    }
+                    .scrollTargetLayout()
                 }
+                .scrollTargetBehavior(.paging)
+                .ignoresSafeArea(edges: .bottom)
+                
             }
-            .tabViewStyle(.page(indexDisplayMode: .always))
+            
         }
         .background(Color(red: 252/255, green: 172/255, blue: 80/255).edgesIgnoringSafeArea(.all))
-        .toolbar(.hidden, for: .navigationBar) 
+        .toolbar(.hidden, for: .navigationBar)
         .ignoresSafeArea(edges: .top)
     }
 }
