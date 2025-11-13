@@ -29,37 +29,22 @@ struct GridBackgroundView: View {
 
 struct JuegoView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @EnvironmentObject var activeProfileManager: ActiveProfileManager
-    @Query var profiles: [Profile]
-    var activeProfile: Profile {
-        if let activeID = activeProfileManager.activeProfileID,
-           let profile = profiles.first(where: { $0.id == activeID }) {
-            return profile
-        } else if let firstProfile = profiles.first {
-            return firstProfile
-        } else {
-            return Profile(name: "Error", imageName: "perfil1", backgroundColorHex: "#FF0000", realName: "Error", age: nil, allergies: [])
-        }
-    }
-    
-    @State private var puntos: Int = 0
-    @State private var alimentosEnPantalla: [Alimento] = []
-    @State private var proyectil: Proyectil? = nil
-    @State private var armaPosition: CGPoint = .zero
-    @State private var sePuedeDisparar: Bool = true
-    
-    @State private var mostrarMensajePuntos: Bool = false
-    @State private var mensajePuntosTexto: String = ""
-    @State private var mensajePuntosOffset: CGFloat = 0
-    
-    @State private var isGameOver: Bool = false
-    @State private var showingWinAlert: Bool = false
-    let winScore: Int = 100
-    
-    private let alimentoRepo = AlimentoRepository()
-    
-    @State private var gameTimer = Timer.publish(every: 0.03, on: .main, in: .common).autoconnect()
-
+        let activeProfile: Profile
+        let nivelNumero: Int
+        
+        @State private var puntos: Int = 0
+        @State private var alimentosEnPantalla: [Alimento] = []
+        @State private var proyectil: Proyectil? = nil
+        @State private var armaPosition: CGPoint = .zero
+        @State private var sePuedeDisparar: Bool = true
+        @State private var mostrarMensajePuntos: Bool = false
+        @State private var mensajePuntosTexto: String = ""
+        @State private var mensajePuntosOffset: CGFloat = 0
+        @State private var isGameOver: Bool = false
+        @State private var showingWinAlert: Bool = false
+        let winScore: Int = 100
+        private let alimentoRepo = AlimentoRepository()
+        @State private var gameTimer = Timer.publish(every: 0.03, on: .main, in: .common).autoconnect()
     var body: some View {
         GeometryReader { geo in
             ZStack {
@@ -251,18 +236,22 @@ struct JuegoView: View {
     }
     
     func checkGameStatus() {
-        if puntos >= winScore {
-            puntos = winScore
-            isGameOver = true
-            sePuedeDisparar = false
-            gameTimer.upstream.connect().cancel()
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                showingWinAlert = true
+            if puntos >= winScore {
+                puntos = winScore
+                isGameOver = true
+                sePuedeDisparar = false
+                gameTimer.upstream.connect().cancel()
+                if nivelNumero == activeProfile.highestLevelUnlocked {
+                    if nivelNumero < 10 {
+                        activeProfile.highestLevelUnlocked += 1
+                    }
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    showingWinAlert = true
+                }
             }
         }
-        
-    }
     
     func mostrarMensaje(texto: String) {
         mensajePuntosTexto = texto
@@ -278,7 +267,9 @@ struct JuegoView: View {
 }
 
 #Preview {
-    JuegoView()
+    let previewProfile = Profile(name: "Preview", imageName: "perfil1", backgroundColorHex: "#FFF", realName: "Preview", age: 8, allergies: ["Maní"])
+    
+    return JuegoView(activeProfile: previewProfile, nivelNumero: 1)
         .environmentObject(ActiveProfileManager())
         .modelContainer(for: Profile.self)
 }

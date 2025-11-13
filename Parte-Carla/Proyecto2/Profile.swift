@@ -12,14 +12,14 @@ class Profile {
     var realName: String
     var age: Int? 
     var allergies: [String]
-    
+    var highestLevelUnlocked: Int
     
     @Transient
     var backgroundColor: Color {
         Color(hex: backgroundColorHex)
     }
     
-    init(id: UUID = UUID(), name: String, imageName: String, backgroundColorHex: String, realName: String, age: Int?, allergies: [String]) {
+    init(id: UUID = UUID(), name: String, imageName: String, backgroundColorHex: String, realName: String, age: Int?, allergies: [String], highestLevelUnlocked: Int = 1) {
         self.id = id
         self.name = name
         self.imageName = imageName
@@ -27,5 +27,6 @@ class Profile {
         self.realName = realName
         self.age = age
         self.allergies = allergies
+        self.highestLevelUnlocked = highestLevelUnlocked
     }
 }

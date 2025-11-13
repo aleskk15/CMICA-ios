@@ -4,6 +4,7 @@ import SwiftData
 struct ContentView: View {
     
     @EnvironmentObject var activeProfileManager: ActiveProfileManager
+    @Environment(\.modelContext) var modelContext
     @Query var profiles: [Profile]
     
     @State private var showingFirstTimeSetup: Bool = false
@@ -131,14 +132,15 @@ struct ContentView: View {
             UINavigationController.prototype.navigationBar.isHidden = false
         }
         .sheet(isPresented: $showingFirstTimeSetup) {
-            NavigationView {
-                ProfileFormView_Step1(isPresented: $showingFirstTimeSetup)
-                    .environmentObject(activeProfileManager)
+                    NavigationView {
+                        ProfileFormView_Step1(isPresented: $showingFirstTimeSetup)
+                            .environmentObject(activeProfileManager)
+                    }
+                    .interactiveDismissDisabled()
+                    .modelContext(modelContext)
+                }
             }
-            .interactiveDismissDisabled()
         }
-    }
-}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

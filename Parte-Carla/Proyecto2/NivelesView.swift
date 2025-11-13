@@ -6,10 +6,26 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct NivelesView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var activeProfileManager: ActiveProfileManager
+        @Query var profiles: [Profile]
+        
+        var activeProfile: Profile {
+            if let activeID = activeProfileManager.activeProfileID,
+               let profile = profiles.first(where: { $0.id == activeID }) {
+                return profile
+            } else if let firstProfile = profiles.first {
+                return firstProfile
+            } else {
+                // Perfil de emergencia
+                return Profile(name: "Error", imageName: "perfil1", backgroundColorHex: "#FF0000", realName: "Error", age: nil, allergies: [])
+            }
+        }
+    
     
     var body: some View {
         VStack(spacing: 0) {
@@ -44,23 +60,23 @@ struct NivelesView: View {
             .background(Color(red: 252/255, green: 172/255, blue: 80/255))
 
             GeometryReader { geometry in
-                
-                ScrollView(.vertical) {
-                    
-                    VStack(spacing: 0) {
-                        ForEach(1...10, id: \.self) { numero in
-                            NivelDetalleView(nivelNumero: numero)
-                                .frame(height: geometry.size.height)
+                            
+                            ScrollView(.vertical) {
+                                
+                                VStack(spacing: 0) {
+                                    ForEach(1...10, id: \.self) { numero in
+
+                                        NivelDetalleView(nivelNumero: numero, activeProfile: activeProfile)
+                                            .frame(height: geometry.size.height)
+                                    }
+                                }
+                                .scrollTargetLayout()
+                            }
+                            .scrollTargetBehavior(.paging)
+                            .ignoresSafeArea(edges: .bottom)
+                            
                         }
                     }
-                    .scrollTargetLayout()
-                }
-                .scrollTargetBehavior(.paging)
-                .ignoresSafeArea(edges: .bottom)
-                
-            }
-            
-        }
         .background(Color(red: 252/255, green: 172/255, blue: 80/255).edgesIgnoringSafeArea(.all))
         .toolbar(.hidden, for: .navigationBar)
         .ignoresSafeArea(edges: .top)
@@ -69,4 +85,6 @@ struct NivelesView: View {
 
 #Preview {
     NivelesView()
+        .environmentObject(ActiveProfileManager())
+        .modelContainer(for: Profile.self) 
 }

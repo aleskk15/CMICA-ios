@@ -1,10 +1,18 @@
-
+//
+//  NivelDetalleView.swift
+//
 
 import SwiftUI
 
 struct NivelDetalleView: View {
     
     let nivelNumero: Int
+    
+    let activeProfile: Profile
+    
+    var isLocked: Bool {
+        nivelNumero > activeProfile.highestLevelUnlocked
+    }
     
     var body: some View {
         ZStack {
@@ -24,7 +32,7 @@ struct NivelDetalleView: View {
                     .frame(width: 280, height: 280)
                     .offset(x: 15)
                 
-                NavigationLink(destination: JuegoView()) {
+                NavigationLink(destination: JuegoView(activeProfile: activeProfile, nivelNumero: nivelNumero)) {
                     Text("Jugar")
                         .font(.title2).fontWeight(.bold).foregroundColor(.black)
                         .padding(.vertical, 15).padding(.horizontal, 70)
@@ -32,21 +40,29 @@ struct NivelDetalleView: View {
                         .clipShape(Capsule())
                         .shadow(color: .black.opacity(0.2), radius: 5, y: 5)
                 }
-                
-                Text("\(nivelNumero)")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .frame(width: 70, height: 70)
-                    .background(
-                        Circle()
-                            .fill(Color(red: 66/255, green: 211/255, blue: 197/255))
-                            .overlay(
-                                Circle().stroke(Color.black, lineWidth: 4)
-                            )
-                    )
-                    .padding(.top, 10)
-                
+                .disabled(isLocked)
+                .grayscale(isLocked ? 1.0 : 0)
+                ZStack {
+                    Circle()
+                        .fill(Color(red: 66/255, green: 211/255, blue: 197/255))
+                        .overlay(
+                            Circle().stroke(Color.black, lineWidth: 4)
+                        )
+                        .grayscale(isLocked ? 1.0 : 0)
+                    if isLocked {
+                        Image(systemName: "lock.fill")
+                            .font(.title)
+                            .foregroundColor(.white)
+                    } else {
+                        Text("\(nivelNumero)")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                    }
+                }
+                .frame(width: 70, height: 70)
+                .padding(.top, 10)
+
                 Spacer()
                 Spacer()
             }
@@ -55,7 +71,6 @@ struct NivelDetalleView: View {
     }
 }
 
-//
 struct FruitOverlayView: View {
     var body: some View {
         GeometryReader { geo in
@@ -74,6 +89,9 @@ struct FruitOverlayView: View {
     }
 }
 
+
 #Preview {
-    NivelDetalleView(nivelNumero: 1)
+    let previewProfile = Profile(name: "Preview", imageName: "perfil1", backgroundColorHex: "#FFF", realName: "Preview", age: 8, allergies: [], highestLevelUnlocked: 2)
+    
+    return NivelDetalleView(nivelNumero: 3, activeProfile: previewProfile)
 }
