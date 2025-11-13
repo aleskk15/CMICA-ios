@@ -13,6 +13,7 @@ class Profile {
     var age: Int? 
     var allergies: [String]
     
+    
     @Transient
     var backgroundColor: Color {
         Color(hex: backgroundColorHex)

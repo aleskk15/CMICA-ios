@@ -1,5 +1,7 @@
 import SwiftUI
 import SwiftData
+
+// --- GridBackgroundView (No cambia) ---
 struct GridBackgroundView: View {
     let gridSize: CGFloat = 70
     let lineColor = Color.white.opacity(0.3)
@@ -29,7 +31,6 @@ struct JuegoView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var activeProfileManager: ActiveProfileManager
     @Query var profiles: [Profile]
-    
     var activeProfile: Profile {
         if let activeID = activeProfileManager.activeProfileID,
            let profile = profiles.first(where: { $0.id == activeID }) {
@@ -51,7 +52,13 @@ struct JuegoView: View {
     @State private var mensajePuntosTexto: String = ""
     @State private var mensajePuntosOffset: CGFloat = 0
     
+    @State private var isGameOver: Bool = false
+    @State private var showingWinAlert: Bool = false
+    let winScore: Int = 100
+    
     private let alimentoRepo = AlimentoRepository()
+    
+    @State private var gameTimer = Timer.publish(every: 0.03, on: .main, in: .common).autoconnect()
 
     var body: some View {
         GeometryReader { geo in
@@ -74,16 +81,13 @@ struct JuegoView: View {
 
                 VStack(spacing: 0) {
                     HStack {
-                        Button(action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }) {
+                        Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
                             Image(systemName: "chevron.left")
                                 .font(.title).fontWeight(.bold).foregroundColor(.white)
                         }
                         Text("Alérgico al: ").font(.title).fontWeight(.bold).foregroundColor(.white)
-                        // Mostramos las alergias REALES del perfil
                         Text(activeProfile.allergies.isEmpty ? "Nada" : activeProfile.allergies.joined(separator: ", "))
-                            .font(.title3).fontWeight(.bold).foregroundColor(.white) // Un poco más pequeño
+                            .font(.title3).fontWeight(.bold).foregroundColor(.white)
                             .lineLimit(1)
                         Spacer()
                     }
@@ -92,48 +96,40 @@ struct JuegoView: View {
                     .background(Color.black.opacity(0.2).edgesIgnoringSafeArea(.horizontal))
                     .padding(.top, 50)
 
-                    Text("\(puntos) puntos") // Mostramos los puntos REALES
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                    Text("\(puntos) puntos")
+                        .font(.largeTitle).fontWeight(.bold)
                         .foregroundColor(Color(red: 255/255, green: 220/255, blue: 0/255))
                         .shadow(color: .black.opacity(0.7), radius: 3, y: 3)
                         .padding(.vertical, 20)
-
-                    Spacer() // Ocupa el espacio restante
+                    
+                    Spacer()
                 }
                 .ignoresSafeArea(edges: .top)
-                
-                // --- ÁREA DE JUEGO (COMIDA, ARMA, PROYECTIL) ---
-                
-                // 1. Dibuja los 15 alimentos
+
                 ForEach(alimentosEnPantalla) { alimento in
                     Image(alimento.imagenNombre)
                         .resizable().scaledToFit()
-                        .frame(width: 120) // Tamaño unificado
+                        .frame(width: 120)
                         .position(alimento.position)
-                        .opacity(alimento.isHit ? 0 : 1) // Desaparece si es golpeado
-                        .shadow(color: alimento.isAlergenoParaJugador ? .red : .green, radius: 5) // Sombra de color
+                        .opacity(alimento.isHit ? 0 : 1)
+                        .shadow(color: alimento.isAlergenoParaJugador ? .red : .clear, radius: 5, x: 0, y: 3)
                         .onTapGesture {
-                            // ¡Este es tu "TRIGGER"!
-                            if sePuedeDisparar {
+                            if sePuedeDisparar && !isGameOver { // CAMBIO: No disparar si el juego terminó
                                 dispararHacia(alimento: alimento, geometry: geo)
                             }
                         }
                 }
                 
-                // 2. Dibuja el arma
                 Image("arma")
                     .resizable().scaledToFit().frame(width: 150)
                     .position(armaPosition)
-                
-                // 3. Dibuja el proyectil (si existe)
+
                 if let proyectil = proyectil {
                     Image("bolaRoja")
                         .resizable().scaledToFit().frame(width: 60)
                         .position(proyectil.position)
                 }
                 
-                // 4. Dibuja el mensaje de puntos flotante
                 if mostrarMensajePuntos {
                     VStack { Text(mensajePuntosTexto) }
                         .font(.system(.title3, weight: .bold))
@@ -144,19 +140,60 @@ struct JuegoView: View {
                 }
             }
             .onAppear {
-                // Configuración inicial del juego
                 self.armaPosition = CGPoint(x: geo.size.width / 2, y: geo.size.height * 0.9)
                 generarAlimentos(geometry: geo)
             }
-        }
+            .onReceive(gameTimer) { _ in
+                // CAMBIO: Si el juego terminó, el timer deja de mover las cosas
+                guard !isGameOver else { return }
+                gameTick(geometry: geo)
+            }
+
+            //.alert("¡Felicidades!", isPresented: $showingWinAlert) {
+                Button("Volver al Menú") {
+
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
+        //}
         .toolbar(.hidden, for: .navigationBar)
     }
     
-    // --- 3. FUNCIONES DE LÓGICA DEL JUEGO ---
+    
+    func gameTick(geometry: GeometryProxy) {
+        moverAlimentos(geometry: geometry)
+        reemplazarAlimentosPerdidos(geometry: geometry)
+    }
+    
+    func moverAlimentos(geometry: GeometryProxy) {
+        for i in alimentosEnPantalla.indices {
+            if !alimentosEnPantalla[i].isHit {
+                alimentosEnPantalla[i].position.y += alimentosEnPantalla[i].velocidad
+            }
+        }
+    }
+    
+    func reemplazarAlimentosPerdidos(geometry: GeometryProxy) {
+        for i in alimentosEnPantalla.indices {
+            guard i < alimentosEnPantalla.count else { continue }
+            
+            if alimentosEnPantalla[i].position.y > (geometry.size.height + 60) {
+
+                if alimentosEnPantalla[i].isAlergenoParaJugador {
+                    puntos -= 5
+                    mostrarMensaje(texto: "-5 Puntos")
+                    // CAMBIO: Revisar si perdiste
+                    checkGameStatus()
+                }
+                
+                if let nuevoAlimento = alimentoRepo.generarUnAlimento(alergiasJugador: activeProfile.allergies, geometry: geometry) {
+                    alimentosEnPantalla[i] = nuevoAlimento
+                }
+            }
+        }
+    }
     
     func generarAlimentos(geometry: GeometryProxy) {
-        // Llama al repositorio para obtener 15 alimentos
-        // usando las alergias del perfil activo
         self.alimentosEnPantalla = alimentoRepo.generarAlimentosParaNivel(
             numAlimentos: 15,
             alergiasJugador: activeProfile.allergies,
@@ -165,59 +202,66 @@ struct JuegoView: View {
     }
     
     func dispararHacia(alimento: Alimento, geometry: GeometryProxy) {
-        // 1. Bloquea nuevos disparos
         sePuedeDisparar = false
         
-        // 2. Crea el proyectil en la posición del arma
         proyectil = Proyectil(position: self.armaPosition)
         
-        // 3. Anima el proyectil
         withAnimation(.linear(duration: 0.4)) {
             proyectil?.position = alimento.position
         }
         
-        // 4. Procesa el impacto después de la animación
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             procesarImpacto(alimento: alimento, geometry: geometry)
         }
     }
     
     func procesarImpacto(alimento: Alimento, geometry: GeometryProxy) {
-        // 1. Reinicia el proyectil
         self.proyectil = nil
         
-        // 2. Marca la comida como "golpeada"
-        if let index = alimentosEnPantalla.firstIndex(where: { $0.id == alimento.id }) {
-            alimentosEnPantalla[index].isHit = true
+        guard let index = alimentosEnPantalla.firstIndex(where: { $0.id == alimento.id }) else {
+            sePuedeDisparar = true
+            return
         }
         
-        // 3. Calcula los puntos
+        alimentosEnPantalla[index].isHit = true
+        
         if alimento.isAlergenoParaJugador {
-            // ¡Bien! Le diste a un alérgeno
-            puntos += 5
-            mostrarMensaje(texto: "+5 Puntos!")
+            puntos += 50
+            mostrarMensaje(texto: "+50 Puntos!")
         } else {
-            // ¡Mal! Le diste a comida segura
-            puntos -= 2
-            mostrarMensaje(texto: "-2 Puntos")
+            puntos -= 10
+            mostrarMensaje(texto: "-10 Puntos")
         }
         
-        // 4. Reemplaza la comida golpeada por una nueva
-        // (Para que siempre haya 15 en pantalla)
+        checkGameStatus()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            alimentosEnPantalla.removeAll { $0.id == alimento.id }
+
+            guard !isGameOver else { return }
             
-            // Genera UNA comida nueva para reemplazarla
-            let nuevaComida = alimentoRepo.generarAlimentosParaNivel(
-                numAlimentos: 1,
+            if let nuevaComida = alimentoRepo.generarUnAlimento(
                 alergiasJugador: activeProfile.allergies,
                 geometry: geometry
-            )
-            alimentosEnPantalla.append(contentsOf: nuevaComida)
+            ) {
+                alimentosEnPantalla[index] = nuevaComida
+            }
             
-            // 5. Permite disparar de nuevo
             sePuedeDisparar = true
         }
+    }
+    
+    func checkGameStatus() {
+        if puntos >= winScore {
+            puntos = winScore
+            isGameOver = true
+            sePuedeDisparar = false
+            gameTimer.upstream.connect().cancel()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                showingWinAlert = true
+            }
+        }
+        
     }
     
     func mostrarMensaje(texto: String) {
@@ -234,8 +278,7 @@ struct JuegoView: View {
 }
 
 #Preview {
-    // El Preview necesita el EnvironmentObject para funcionar
     JuegoView()
         .environmentObject(ActiveProfileManager())
-        .modelContainer(for: Profile.self) // Y el contenedor de SwiftData
+        .modelContainer(for: Profile.self)
 }
