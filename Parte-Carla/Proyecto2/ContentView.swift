@@ -90,12 +90,17 @@ struct ContentView: View {
                         blue: 150 / 255.0
                     )
                     
-                    Button(action: { print("Comenzar") }) {
-                        Text("Comenzar")
-                            .font(.title2).fontWeight(.bold).foregroundColor(.white)
-                            .frame(width: 250, height: 60)
-                            .background(buttonColor)
-                            .cornerRadius(30)
+                    NavigationLink(destination: JuegoView(
+                                                        nivelNumero: activeProfile.highestLevelUnlocked
+                                    )) {
+                                        Text("Comenzar")
+                                            .font(.title2).fontWeight(.bold).foregroundColor(.white)
+                                            .frame(width: 250, height: 60)
+                                            .background(buttonColor)
+                                            .cornerRadius(30)
+                                    }
+
+                    NavigationLink(destination: NivelesView()) {
                     }
 
                     NavigationLink(destination: NivelesView()) {
