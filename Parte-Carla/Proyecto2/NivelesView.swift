@@ -21,7 +21,6 @@ struct NivelesView: View {
             } else if let firstProfile = profiles.first {
                 return firstProfile
             } else {
-                // Perfil de emergencia
                 return Profile(name: "Error", imageName: "perfil1", backgroundColorHex: "#FF0000", realName: "Error", age: nil, allergies: [])
             }
         }
@@ -86,5 +85,5 @@ struct NivelesView: View {
 #Preview {
     NivelesView()
         .environmentObject(ActiveProfileManager())
-        .modelContainer(for: Profile.self) 
+        .modelContainer(for: Profile.self)
 }

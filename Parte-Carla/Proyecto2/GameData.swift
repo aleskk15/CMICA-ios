@@ -1,12 +1,5 @@
-//
-//  GameData.swift
-//  Proyecto2
-//
-//  Created by Alumno on 11/11/25.
-//
 import Foundation
 import SwiftUI
-
 
 enum Alergeno: String {
     case mani = "Maní"
@@ -32,12 +25,18 @@ struct Alimento: Identifiable, Equatable {
     var position: CGPoint = .zero
     var isAlergenoParaJugador: Bool = false
     var isHit: Bool = false
-    var velocidad: CGFloat = 2.0 // <-- ¡AÑADIMOS ESTO DE VUELTA!
+    
 }
 
+struct Proyectil: Identifiable {
+    let id = UUID()
+    var position: CGPoint
+}
+
+
 class AlimentoRepository {
+    
     private let todosLosAlimentos: [Alimento] = [
-        // ... (Aquí va toda tu lista de alimentos, no la borres) ...
         Alimento(nombre: "Manzana", imagenNombre: "manzana", alergenos: []),
         Alimento(nombre: "Mazapán", imagenNombre: "mazapan", alergenos: [.mani]),
         Alimento(nombre: "Cacahuate", imagenNombre: "cacahuate", alergenos: [.mani]),
@@ -72,52 +71,73 @@ class AlimentoRepository {
         Alimento(nombre: "salsa-soya", imagenNombre: "salsa-soya", alergenos: [.soya]),
     ]
     
-    func generarAlimentosParaNivel(numAlimentos: Int, alergiasJugador: [String], geometry: GeometryProxy) -> [Alimento] {
+    
+
+    
+    func generarSetDeAlimentos(alergiasJugador: [String], gameSize: CGSize) -> [Alimento] {
+        var setDeAlimentos: [Alimento] = []
         
-        var alimentosDelNivel: [Alimento] = []
-        let areaJuego = geometry.size
-        
-        for _ in 0..<numAlimentos {
-            guard var nuevoAlimento = todosLosAlimentos.randomElement() else { continue }
-            
+        var alimentosProcesados: [Alimento] = todosLosAlimentos.map { alimentoBase in
+            var nuevoAlimento = alimentoBase
             nuevoAlimento.isAlergenoParaJugador = nuevoAlimento.alergenos.contains { alergeno in
                 alergiasJugador.contains(alergeno.rawValue)
             }
+            return nuevoAlimento
+        }
+        
+        let alergenos = alimentosProcesados.filter { $0.isAlergenoParaJugador }
+        let seguros = alimentosProcesados.filter { !$0.isAlergenoParaJugador }
+        
+        if let alergenoParaRonda = alergenos.randomElement() {
+            setDeAlimentos.append(alergenoParaRonda)
+        } else {
+            if let seguroExtra = seguros.randomElement() {
+                setDeAlimentos.append(seguroExtra)
+            }
+        }
+        
+        for _ in 0..<2 {
+            if let seguroParaRonda = seguros.randomElement() {
+                if !setDeAlimentos.contains(where: { $0.id == seguroParaRonda.id }) {
+                    setDeAlimentos.append(seguroParaRonda)
+                }
+            }
+        }
+        
+        let areaJuego = gameSize
+        
+        let laneWidth = areaJuego.width / 3
+        let lanePadding: CGFloat = 50
+        
+        var xPositions: [CGFloat] = [
+            CGFloat.random(in: (laneWidth * 0 + lanePadding)...(laneWidth * 1 - lanePadding)),
+            CGFloat.random(in: (laneWidth * 1 + lanePadding)...(laneWidth * 2 - lanePadding)),
+            CGFloat.random(in: (laneWidth * 2 + lanePadding)...(laneWidth * 3 - lanePadding)),
+        ]
+        
+        let ySpawnStart = areaJuego.height * 0.30
+        let ySpawnEnd = areaJuego.height * 0.65
+        let ySpawnHeight = ySpawnEnd - ySpawnStart
+        let yLaneHeight = ySpawnHeight / 3
+        
+        var yPositions: [CGFloat] = [
+            CGFloat.random(in: (ySpawnStart)...(ySpawnStart + yLaneHeight)),
+            CGFloat.random(in: (ySpawnStart + yLaneHeight)...(ySpawnStart + yLaneHeight * 2)),
+            CGFloat.random(in: (ySpawnStart + yLaneHeight * 2)...(ySpawnStart + yLaneHeight * 3))
+        ]
+        
+        xPositions.shuffle()
+        yPositions.shuffle()
+        
+        for i in setDeAlimentos.indices {
+            guard i < xPositions.count && i < yPositions.count else { continue }
             
-            nuevoAlimento.position = CGPoint(
-                x: CGFloat.random(in: 50...(areaJuego.width - 50)),
-                y: CGFloat.random(in: -areaJuego.height...(-50))
+            setDeAlimentos[i].position = CGPoint(
+                x: xPositions[i],
+                y: yPositions[i]
             )
-            
-            nuevoAlimento.velocidad = CGFloat.random(in: 1.0...2.5)
-            
-            alimentosDelNivel.append(nuevoAlimento)
         }
         
-        return alimentosDelNivel
+        return setDeAlimentos
     }
-    
-    func generarUnAlimento(alergiasJugador: [String], geometry: GeometryProxy) -> Alimento? {
-        guard var nuevoAlimento = todosLosAlimentos.randomElement() else { return nil }
-        
-        let areaJuego = geometry.size
-        
-        nuevoAlimento.isAlergenoParaJugador = nuevoAlimento.alergenos.contains { alergeno in
-            alergiasJugador.contains(alergeno.rawValue)
-        }
-        
-        nuevoAlimento.position = CGPoint(
-            x: CGFloat.random(in: 50...(areaJuego.width - 50)),
-            y: -50 
-        )
-        
-        nuevoAlimento.velocidad = CGFloat.random(in: 1.0...2.5)
-        
-        return nuevoAlimento
-    }
-}
-
-struct Proyectil: Identifiable {
-    let id = UUID()
-    var position: CGPoint
 }

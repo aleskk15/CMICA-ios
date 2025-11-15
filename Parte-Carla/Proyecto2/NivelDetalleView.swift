@@ -32,7 +32,7 @@ struct NivelDetalleView: View {
                     .frame(width: 280, height: 280)
                     .offset(x: 15)
                 
-                NavigationLink(destination: JuegoView(activeProfile: activeProfile, nivelNumero: nivelNumero)) {
+                NavigationLink(destination: JuegoView(nivelNumero: nivelNumero)) {
                     Text("Jugar")
                         .font(.title2).fontWeight(.bold).foregroundColor(.black)
                         .padding(.vertical, 15).padding(.horizontal, 70)

@@ -1,7 +1,6 @@
 import SwiftUI
 import SwiftData
 
-// --- GridBackgroundView (No cambia) ---
 struct GridBackgroundView: View {
     let gridSize: CGFloat = 70
     let lineColor = Color.white.opacity(0.3)
@@ -29,22 +28,36 @@ struct GridBackgroundView: View {
 
 struct JuegoView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-        let activeProfile: Profile
-        let nivelNumero: Int
-        
-        @State private var puntos: Int = 0
-        @State private var alimentosEnPantalla: [Alimento] = []
-        @State private var proyectil: Proyectil? = nil
-        @State private var armaPosition: CGPoint = .zero
-        @State private var sePuedeDisparar: Bool = true
-        @State private var mostrarMensajePuntos: Bool = false
-        @State private var mensajePuntosTexto: String = ""
-        @State private var mensajePuntosOffset: CGFloat = 0
-        @State private var isGameOver: Bool = false
-        @State private var showingWinAlert: Bool = false
-        let winScore: Int = 100
-        private let alimentoRepo = AlimentoRepository()
-        @State private var gameTimer = Timer.publish(every: 0.03, on: .main, in: .common).autoconnect()
+    let nivelNumero: Int
+    @EnvironmentObject var activeProfileManager: ActiveProfileManager
+    @Query var profiles: [Profile]
+    var activeProfile: Profile {
+        if let activeID = activeProfileManager.activeProfileID,
+           let profile = profiles.first(where: { $0.id == activeID }) {
+            return profile
+        } else if let firstProfile = profiles.first {
+            return firstProfile
+        } else {
+            return Profile(name: "Error", imageName: "perfil1", backgroundColorHex: "#FF0000", realName: "Error", age: nil, allergies: ["Maní"])
+        }
+    }
+    
+    @State private var puntos: Int = 0
+    @State private var alimentosEnPantalla: [Alimento] = []
+    @State private var proyectil: Proyectil? = nil
+    @State private var armaPosition: CGPoint = .zero
+    @State private var sePuedeDisparar: Bool = true
+    
+    @State private var mostrarMensajePuntos: Bool = false
+    @State private var mensajePuntosTexto: String = ""
+    @State private var mensajePuntosOffset: CGFloat = 0
+    
+    private let alimentoRepo = AlimentoRepository()
+    @State private var gameAreaSize: CGSize = .zero
+    
+    @State private var roundTimer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    @State private var roundTimeRemaining: Int = 2
+
     var body: some View {
         GeometryReader { geo in
             ZStack {
@@ -85,7 +98,9 @@ struct JuegoView: View {
                         .font(.largeTitle).fontWeight(.bold)
                         .foregroundColor(Color(red: 255/255, green: 220/255, blue: 0/255))
                         .shadow(color: .black.opacity(0.7), radius: 3, y: 3)
-                        .padding(.vertical, 20)
+                        .padding(.vertical, 10)
+                    
+     
                     
                     Spacer()
                 }
@@ -99,8 +114,8 @@ struct JuegoView: View {
                         .opacity(alimento.isHit ? 0 : 1)
                         .shadow(color: alimento.isAlergenoParaJugador ? .red : .clear, radius: 5, x: 0, y: 3)
                         .onTapGesture {
-                            if sePuedeDisparar && !isGameOver { // CAMBIO: No disparar si el juego terminó
-                                dispararHacia(alimento: alimento, geometry: geo)
+                            if sePuedeDisparar {
+                                dispararHacia(alimento: alimento)
                             }
                         }
                 }
@@ -125,68 +140,46 @@ struct JuegoView: View {
                 }
             }
             .onAppear {
+                self.gameAreaSize = geo.size
                 self.armaPosition = CGPoint(x: geo.size.width / 2, y: geo.size.height * 0.9)
-                generarAlimentos(geometry: geo)
+                iniciarNuevaRonda() 
             }
-            .onReceive(gameTimer) { _ in
-                // CAMBIO: Si el juego terminó, el timer deja de mover las cosas
-                guard !isGameOver else { return }
-                gameTick(geometry: geo)
+            .onReceive(roundTimer) { _ in
+                manejarTickDelRound()
             }
-
-            //.alert("¡Felicidades!", isPresented: $showingWinAlert) {
-                Button("Volver al Menú") {
-
-                    presentationMode.wrappedValue.dismiss()
-                }
-            }
-        //}
+        }
         .toolbar(.hidden, for: .navigationBar)
     }
     
     
-    func gameTick(geometry: GeometryProxy) {
-        moverAlimentos(geometry: geometry)
-        reemplazarAlimentosPerdidos(geometry: geometry)
-    }
-    
-    func moverAlimentos(geometry: GeometryProxy) {
-        for i in alimentosEnPantalla.indices {
-            if !alimentosEnPantalla[i].isHit {
-                alimentosEnPantalla[i].position.y += alimentosEnPantalla[i].velocidad
-            }
-        }
-    }
-    
-    func reemplazarAlimentosPerdidos(geometry: GeometryProxy) {
-        for i in alimentosEnPantalla.indices {
-            guard i < alimentosEnPantalla.count else { continue }
-            
-            if alimentosEnPantalla[i].position.y > (geometry.size.height + 60) {
-
-                if alimentosEnPantalla[i].isAlergenoParaJugador {
-                    puntos -= 5
-                    mostrarMensaje(texto: "-5 Puntos")
-                    // CAMBIO: Revisar si perdiste
-                    checkGameStatus()
-                }
-                
-                if let nuevoAlimento = alimentoRepo.generarUnAlimento(alergiasJugador: activeProfile.allergies, geometry: geometry) {
-                    alimentosEnPantalla[i] = nuevoAlimento
-                }
-            }
-        }
-    }
-    
-    func generarAlimentos(geometry: GeometryProxy) {
-        self.alimentosEnPantalla = alimentoRepo.generarAlimentosParaNivel(
-            numAlimentos: 15,
+    func iniciarNuevaRonda() {
+        self.alimentosEnPantalla = alimentoRepo.generarSetDeAlimentos(
             alergiasJugador: activeProfile.allergies,
-            geometry: geometry
+            gameSize: self.gameAreaSize
         )
+        self.roundTimeRemaining = 2
+        self.sePuedeDisparar = true
     }
     
-    func dispararHacia(alimento: Alimento, geometry: GeometryProxy) {
+    func manejarTickDelRound() {
+        guard sePuedeDisparar else { return }
+        
+        if roundTimeRemaining > 0 {
+            roundTimeRemaining -= 1
+        }
+        
+        if roundTimeRemaining == 0 {
+            sePuedeDisparar = false
+            puntos -= 5
+            mostrarMensaje(texto: "¡Muy lento! -5 Puntos")
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                iniciarNuevaRonda()
+            }
+        }
+    }
+    
+    func dispararHacia(alimento: Alimento) {
         sePuedeDisparar = false
         
         proyectil = Proyectil(position: self.armaPosition)
@@ -196,62 +189,32 @@ struct JuegoView: View {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            procesarImpacto(alimento: alimento, geometry: geometry)
+            procesarImpacto(alimento: alimento)
         }
     }
     
-    func procesarImpacto(alimento: Alimento, geometry: GeometryProxy) {
+    func procesarImpacto(alimento: Alimento) {
         self.proyectil = nil
         
         guard let index = alimentosEnPantalla.firstIndex(where: { $0.id == alimento.id }) else {
-            sePuedeDisparar = true
+            iniciarNuevaRonda()
             return
         }
         
         alimentosEnPantalla[index].isHit = true
         
         if alimento.isAlergenoParaJugador {
-            puntos += 50
-            mostrarMensaje(texto: "+50 Puntos!")
+            puntos += 5
+            mostrarMensaje(texto: "+5 Puntos!")
         } else {
-            puntos -= 10
-            mostrarMensaje(texto: "-10 Puntos")
+            puntos -= 2
+            mostrarMensaje(texto: "-2 Puntos")
         }
         
-        checkGameStatus()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-
-            guard !isGameOver else { return }
-            
-            if let nuevaComida = alimentoRepo.generarUnAlimento(
-                alergiasJugador: activeProfile.allergies,
-                geometry: geometry
-            ) {
-                alimentosEnPantalla[index] = nuevaComida
-            }
-            
-            sePuedeDisparar = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            iniciarNuevaRonda()
         }
     }
-    
-    func checkGameStatus() {
-            if puntos >= winScore {
-                puntos = winScore
-                isGameOver = true
-                sePuedeDisparar = false
-                gameTimer.upstream.connect().cancel()
-                if nivelNumero == activeProfile.highestLevelUnlocked {
-                    if nivelNumero < 10 {
-                        activeProfile.highestLevelUnlocked += 1
-                    }
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    showingWinAlert = true
-                }
-            }
-        }
     
     func mostrarMensaje(texto: String) {
         mensajePuntosTexto = texto
@@ -267,9 +230,7 @@ struct JuegoView: View {
 }
 
 #Preview {
-    let previewProfile = Profile(name: "Preview", imageName: "perfil1", backgroundColorHex: "#FFF", realName: "Preview", age: 8, allergies: ["Maní"])
-    
-    return JuegoView(activeProfile: previewProfile, nivelNumero: 1)
+    JuegoView(nivelNumero: 1)
         .environmentObject(ActiveProfileManager())
         .modelContainer(for: Profile.self)
 }
