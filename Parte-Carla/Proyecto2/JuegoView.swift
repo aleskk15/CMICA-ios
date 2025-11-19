@@ -83,9 +83,9 @@ struct JuegoView: View {
                             Image(systemName: "chevron.left")
                                 .font(.title).fontWeight(.bold).foregroundColor(.white)
                         }
-                        Text("Alérgico al: ").font(.title).fontWeight(.bold).foregroundColor(.white)
+                        Text("Alérgico al: ").font(.custom("LilitaOne",size:30)).fontWeight(.bold).foregroundColor(.white)
                         Text(activeProfile.allergies.isEmpty ? "Nada" : activeProfile.allergies.joined(separator: ", "))
-                            .font(.title3).fontWeight(.bold).foregroundColor(.white)
+                            .font(.custom("LilitaOne", size: 30)).fontWeight(.bold).foregroundColor(.white)
                             .lineLimit(1)
                         Spacer()
                     }
@@ -95,14 +95,14 @@ struct JuegoView: View {
                     .padding(.top, 50)
 
                     Text("\(puntos) puntos")
-                        .font(.largeTitle).fontWeight(.bold)
+                        .font(.custom("LilitaOne", size: 40)).fontWeight(.bold)
                         .foregroundColor(Color(red: 255/255, green: 220/255, blue: 0/255))
                         .shadow(color: .black.opacity(0.7), radius: 3, y: 3)
                         .padding(.vertical, 10)
                     
                     
                     Text("Meta: \(targetPuntos)")
-                        .font(.title2).fontWeight(.bold)
+                        .font(.custom("LilitaOne", size: 25)).fontWeight(.bold)
                         .foregroundColor(.white.opacity(0.8))
                         .shadow(color: .black.opacity(0.5), radius: 2, y: 2)
                         .padding(.bottom, 10)

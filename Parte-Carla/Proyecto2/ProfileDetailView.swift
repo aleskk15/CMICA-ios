@@ -53,33 +53,36 @@ struct ProfileDetailView: View {
             
             VStack(spacing: 0) {
                 
-                HStack {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }) {
+
+                ScrollView {
+                    
+                    HStack {
+                        Button(action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Image(systemName: "chevron.left")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                        }
+                        Spacer()
+                        
+                        Text("Información\n del perfil")
+                            .font(.custom("LilitaOne",size: 40))
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+                        
+                        Spacer()
+                        
                         Image(systemName: "chevron.left")
                             .font(.title2)
                             .fontWeight(.bold)
-                            .foregroundColor(.black)
+                            .opacity(0)
                     }
-                    Spacer()
+                    .padding(.horizontal)
+                    .padding(.top, 75)
+                    .padding(.bottom, 10)
                     
-                    Text("Información del perfil")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
-                    
-                    Spacer()
-                    Image(systemName: "chevron.left")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .opacity(0)
-                }
-                .padding(.horizontal)
-                .padding(.top, 75)
-                .padding(.bottom, 10)
-
-                ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
                         
                         ZStack {
@@ -97,11 +100,17 @@ struct ProfileDetailView: View {
                         .padding(.bottom, 20)
 
                         InfoFieldView(label: "Nombre de Usuario", value: profile.name)
+                            .font(.custom("LilitaOne",size:25))
+                        
                         InfoFieldView(label: "Nombre", value: profile.realName)
+                            .font(.custom("LilitaOne",size:25))
+                        
                         InfoFieldView(label: "Edad", value: profile.age != nil ? "\(profile.age!) años" : "No especificada")
+                            .font(.custom("LilitaOne",size:25))
                         
                         Text("Alergias")
-                            .font(.title2)
+                            .font(.custom("LilitaOne",size:25))
+                            .padding(.bottom, -10)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
                             .padding(.leading, 20)
@@ -110,7 +119,7 @@ struct ProfileDetailView: View {
                         if profile.allergies.isEmpty {
                             HStack {
                                 Text("No se registraron alergias")
-                                    .font(.title3)
+                                    .font(.custom("LilitaOne",size: 25))
                                     .foregroundColor(.black.opacity(0.7))
                                 Spacer()
                             }

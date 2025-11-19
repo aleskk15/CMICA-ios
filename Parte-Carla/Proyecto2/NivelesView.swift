@@ -32,9 +32,10 @@ struct NivelesView: View {
                 }
                 Spacer()
                 Text("Niveles")
-                    .font(.largeTitle)
+                    .font(.custom("LilitaOne", size: 50))
                     .fontWeight(.bold)
                     .foregroundColor(.black)
+                    .padding(.top,20)
                 Spacer()
                 Image(systemName: "chevron.left")
                     .font(.title2)
@@ -46,24 +47,27 @@ struct NivelesView: View {
             .padding(.bottom, 10)
             .background(Color(red: 252/255, green: 172/255, blue: 80/255))
 
-            
-            
             GeometryReader { geometry in
                 
                 ScrollViewReader { scrollProxy in
                     
                     ScrollView(.vertical) {
                         VStack(spacing: 0) {
+                            
+                            Spacer().frame(height: 0).id(0)
+                            
                             ForEach(1...10, id: \.self) { numero in
                                 NivelDetalleView(nivelNumero: numero, activeProfile: activeProfile)
-                                    .frame(height: geometry.size.height)
+                                    //.frame(height: geometry.size.height)
+                                    .containerRelativeFrame(.vertical)
                                 
                             }
                         }
                         .scrollTargetLayout()
                     }
                     .scrollTargetBehavior(.paging)
-                    .ignoresSafeArea(edges: .bottom)
+                    //.ignoresSafeArea(edges: .bottom)
+                    .ignoresSafeArea(.all, edges: .bottom)
                     
                     .onAppear {
                         
@@ -73,7 +77,7 @@ struct NivelesView: View {
                             targetLevel = 10
                         }
                         
-                        scrollProxy.scrollTo(targetLevel, anchor: .top)
+                        scrollProxy.scrollTo(targetLevel, anchor: .center)
                     }
                 }
             }

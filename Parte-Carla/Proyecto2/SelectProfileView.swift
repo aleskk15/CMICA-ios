@@ -34,7 +34,7 @@ struct SelectProfileView: View {
                         }
                         Spacer()
                         Text("Seleccionar perfil")
-                            .font(.largeTitle).fontWeight(.bold).foregroundColor(.black)
+                            .font(.custom("LilitaOne",size:40)).fontWeight(.bold).foregroundColor(.black)
                         Spacer()
                         Image(systemName: "chevron.left").font(.title2).fontWeight(.bold).opacity(0)
                     }
@@ -157,7 +157,7 @@ struct ProfileCircleWithActionsView: View {
             )
             
             Text(profile.name)
-                .font(.headline)
+                .font(.custom("LilitaOne",size:17))
                 .fontWeight(.bold)
                 .foregroundColor(.black)
                 .padding(.top, 5)
@@ -182,7 +182,7 @@ struct AddProfileCircleView: View {
             .shadow(radius: 5)
             
             Text("Añadir perfil")
-                .font(.headline)
+                .font(.custom("LilitaOne", size:17))
                 .fontWeight(.bold)
                 .foregroundColor(.black)
                 .padding(.top, 5)

@@ -40,7 +40,7 @@ struct ContentView: View {
                     HStack {
                         Spacer()
                         Text("KAN")
-                            .font(.largeTitle)
+                            .font(.custom("LilitaOne", size: 50))
                             .fontWeight(.bold)
                             .foregroundColor(.black)
                         Spacer()
@@ -64,7 +64,7 @@ struct ContentView: View {
                                 .overlay(Circle().stroke(Color.black, lineWidth: 2))
 
                                 Text(activeProfile.name)
-                                    .font(.caption)
+                                    .font(.custom("LilitaOne", size: 15))
                                     .fontWeight(.semibold)
                                     .foregroundColor(.black)
                             }
@@ -89,12 +89,13 @@ struct ContentView: View {
                         green: 86 / 255.0,
                         blue: 150 / 255.0
                     )
+                    let color2 = Color(red: 235/255.0, green: 144/255.0, blue: 0/255.0)
                     
                     NavigationLink(destination: JuegoView(
                                                         nivelNumero: activeProfile.highestLevelUnlocked
                                     )) {
-                                        Text("Comenzar")
-                                            .font(.title2).fontWeight(.bold).foregroundColor(.white)
+                                        Text("Jugar")
+                                            .font(.custom("LilitaOne",size:28)).fontWeight(.bold).foregroundColor(.white)
                                             .frame(width: 250, height: 60)
                                             .background(buttonColor)
                                             .cornerRadius(30)
@@ -105,7 +106,7 @@ struct ContentView: View {
 
                     NavigationLink(destination: NivelesView()) {
                         Text("Seleccionar nivel")
-                            .font(.title2).fontWeight(.bold).foregroundColor(.white)
+                            .font(.custom("LilitaOne",size:28)).fontWeight(.bold).foregroundColor(.white)
                             .frame(width: 250, height: 60)
                             .background(buttonColor)
                             .cornerRadius(30)
@@ -113,9 +114,17 @@ struct ContentView: View {
 
                     NavigationLink(destination: HistoriaView()) {
                         Text("Contar una historia")
-                            .font(.title2).fontWeight(.bold).foregroundColor(.white)
+                            .font(.custom("LilitaOne",size:28)).fontWeight(.bold).foregroundColor(.white)
                             .frame(width: 250, height: 60)
                             .background(buttonColor)
+                            .cornerRadius(30)
+                    }
+                    
+                    NavigationLink(destination: InfoView()) {
+                        Text("CONÓCENOS")
+                            .font(.custom("LilitaOne",size:28)).fontWeight(.bold).foregroundColor(.white)
+                            .frame(width: 250, height: 60)
+                            .background(color2)
                             .cornerRadius(30)
                     }
                 }

@@ -26,7 +26,7 @@ struct HistoriaView: View {
                     Spacer()
                     
                     Text("Contar una historia")
-                        .font(.title2)
+                        .font(.custom("LilitaOne",size:40))
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                     
@@ -41,7 +41,7 @@ struct HistoriaView: View {
                 .padding(.top, 40)
 
                 Text("Un día normal")
-                    .font(.largeTitle)
+                    .font(.custom("LilitaOne", size:37))
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity)

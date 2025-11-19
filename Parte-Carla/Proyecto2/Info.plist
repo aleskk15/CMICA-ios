@@ -11,5 +11,9 @@
 		<key>UIImageName</key>
 		<string>LaunchImageFull</string>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>LilitaOne-Regular.ttf</string>
+	</array>
 </dict>
 </plist>

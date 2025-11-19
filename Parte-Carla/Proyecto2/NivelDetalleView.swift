@@ -34,7 +34,7 @@ struct NivelDetalleView: View {
                 
                 NavigationLink(destination: JuegoView(nivelNumero: nivelNumero)) {
                     Text("Jugar")
-                        .font(.title2).fontWeight(.bold).foregroundColor(.black)
+                        .font(.custom("LilitaOne", size: 30)).fontWeight(.bold).foregroundColor(.black)
                         .padding(.vertical, 15).padding(.horizontal, 70)
                         .background(Color.white)
                         .clipShape(Capsule())
