@@ -6,13 +6,15 @@ struct HistoriaView: View {
     let colorFondo = Color(red: 90/255, green: 84/255, blue: 137/255)
     let colorBarras = Color(red: 111/255, green: 105/255, blue: 156/255)
 
+    let historias = StoryRepository.historias
+
     var body: some View {
         ZStack {
             colorFondo
                 .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 0) {
-             
+                
                 HStack {
                     Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
@@ -26,7 +28,7 @@ struct HistoriaView: View {
                     Spacer()
                     
                     Text("Contar una historia")
-                        .font(.custom("LilitaOne",size:40))
+                        .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                     
@@ -40,37 +42,52 @@ struct HistoriaView: View {
                 .padding()
                 .padding(.top, 40)
 
-                Text("Un día normal")
-                    .font(.custom("LilitaOne", size:37))
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(colorBarras)
-                
-                Image("niña")
-                    .resizable()
-                    .scaledToFit()
-                    .padding(.vertical, 40)
-                    .offset(x: 10)
-                Spacer()
+                TabView {
+                    ForEach(historias) { historia in
+                        VStack {
+                            Text(historia.titulo)
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(colorBarras)
+                                .cornerRadius(15)
+                                .padding(.horizontal)
+                            Spacer()
+                            
+                            Image(historia.portada)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxHeight: 350)
+                                .padding(.vertical, 20)
+                                .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 5)
+                            
+                            Spacer()
 
-                Button(action: {
-
-                }) {
-                    Image(systemName: "play.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(.white)
-                        .padding(25)
-                        .background(Color.black)
-                        .clipShape(Circle())
+                            NavigationLink(destination: CuentoView(historia: historia)) {
+                                HStack {
+                                    Image(systemName: "book.fill")
+                                    Text("Leer Historia")
+                                        .fontWeight(.bold)
+                                }
+                                .font(.title2)
+                                .foregroundColor(.white)
+                                .padding(.vertical, 15)
+                                .padding(.horizontal, 40)
+                                .background(Color.black)
+                                .clipShape(Capsule())
+                                .shadow(radius: 5)
+                            }
+                            .padding(.bottom, 60)
+                        }
+                        .tag(historia.id)
+                    }
                 }
-                .padding(.bottom, 50)
+                .tabViewStyle(.page(indexDisplayMode: .always))
+                .indexViewStyle(.page(backgroundDisplayMode: .always)) 
             }
             .ignoresSafeArea(edges: .top)
-            
         }
         .toolbar(.hidden, for: .navigationBar)
     }
