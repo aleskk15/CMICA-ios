@@ -128,7 +128,7 @@ struct ProfileCircleWithActionsView: View {
                 Image(profile.imageName)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: circleSize - 5, height: circleSize - 5)
+                    .frame(width: circleSize - 3, height: circleSize - 3)
                     .clipShape(Circle())
             }
             .frame(width: circleSize, height: circleSize)

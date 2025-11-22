@@ -39,7 +39,7 @@ struct InfoView: View {
                     
                     VStack(spacing: 20) {
                         
-                        Text("Colegio Mexicano de\nInmunología Clínica y\nAlergia A.C.")
+                        Text("Colegio Mexicano de\n Inmunología Clínica y Alergia A.C.")
                             .font(.custom("LilitaOne",size: 25))
                             .fontWeight(.bold)
                             .foregroundColor(lightBlueColor)
@@ -52,7 +52,7 @@ struct InfoView: View {
                             .frame(width: 180, height: 180)
                             .padding(.vertical, 10)
                         
-                        Text("Fue fundado en 1946 y es el organismo que agrupa a todos los Médicos Especialistas en Alergia e Inmunología del país. Su principal función es promover el crecimiento académico y la educación médica continua de sus miembros mediante la organización de cursos de actualización, congresos nacionales e internacionales, simposios, talleres entre otros.")
+                        Text(LocalizedStringKey("cmica_description"))
                             .font(.custom("LilitaOne", size: 23))
                             //.fontWeight(.bold)
                             .foregroundColor(.black)

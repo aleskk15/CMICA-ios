@@ -30,6 +30,8 @@ struct JuegoView: View {
     let nivelNumero: Int
     @EnvironmentObject var activeProfileManager: ActiveProfileManager
     @Query var profiles: [Profile]
+    @EnvironmentObject var languageManager: LanguageManager
+    
     var activeProfile: Profile {
         if let activeID = activeProfileManager.activeProfileID,
            let profile = profiles.first(where: { $0.id == activeID }) {
@@ -84,7 +86,10 @@ struct JuegoView: View {
                                 .font(.title).fontWeight(.bold).foregroundColor(.white)
                         }
                         Text("Alérgico al: ").font(.custom("LilitaOne",size:30)).fontWeight(.bold).foregroundColor(.white)
-                        Text(activeProfile.allergies.isEmpty ? "Nada" : activeProfile.allergies.joined(separator: ", "))
+                        Text(activeProfile.allergies.isEmpty
+                                                     ? "Nada".traducido(languageManager.currentLanguage)
+                                                     : activeProfile.allergies.map { $0.traducido(languageManager.currentLanguage) }.joined(separator: ", ")
+                                                )
                             .font(.custom("LilitaOne", size: 30)).fontWeight(.bold).foregroundColor(.white)
                             .lineLimit(1)
                         Spacer()
@@ -94,14 +99,14 @@ struct JuegoView: View {
                     .background(Color.black.opacity(0.2).edgesIgnoringSafeArea(.horizontal))
                     .padding(.top, 50)
 
-                    Text("\(puntos) puntos")
+                    Text("\(puntos) \("puntos".traducido(languageManager.currentLanguage))")
                         .font(.custom("LilitaOne", size: 40)).fontWeight(.bold)
                         .foregroundColor(Color(red: 255/255, green: 220/255, blue: 0/255))
                         .shadow(color: .black.opacity(0.7), radius: 3, y: 3)
                         .padding(.vertical, 10)
                     
                     
-                    Text("Meta: \(targetPuntos)")
+                    Text("\("Meta".traducido(languageManager.currentLanguage)): \(targetPuntos)")
                         .font(.custom("LilitaOne", size: 25)).fontWeight(.bold)
                         .foregroundColor(.white.opacity(0.8))
                         .shadow(color: .black.opacity(0.5), radius: 2, y: 2)

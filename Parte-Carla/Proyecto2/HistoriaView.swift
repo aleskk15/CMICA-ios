@@ -29,6 +29,14 @@ struct HistoriaView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
+                    
+                    Text("Contar una historia")
+                        .padding(.top,15)
+                        .font(.custom("LilitaOne", size:35))
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                        .padding(.bottom,8)
+                    
                     Spacer()
                     Image(systemName: "chevron.left")
                         .font(.title2).fontWeight(.bold).opacity(0)
@@ -40,7 +48,7 @@ struct HistoriaView: View {
                     ForEach(historias) { historia in
                         VStack {
                             Text(historia.titulo)
-                                .font(.largeTitle)
+                                .font(.custom("LilitaOne", size:40))
                                 .fontWeight(.bold)
                                 .foregroundColor(.black)
                                 .multilineTextAlignment(.center)
@@ -68,8 +76,7 @@ struct HistoriaView: View {
                                     Text("Leer Historia")
                                         .fontWeight(.bold)
                                 }
-                                .font(.title2)
-                                .foregroundColor(.white)
+                                .font(.custom("LilitaOne", size:25))    .foregroundColor(.white)
                                 .padding(.vertical, 15)
                                 .padding(.horizontal, 40)
                                 .background(Color.black)

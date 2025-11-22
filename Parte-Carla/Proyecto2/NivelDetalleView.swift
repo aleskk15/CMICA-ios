@@ -55,7 +55,7 @@ struct NivelDetalleView: View {
                             .foregroundColor(.white)
                     } else {
                         Text("\(nivelNumero)")
-                            .font(.title)
+                            .font(.custom("LilitaOne",size:30))
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                     }
