@@ -7,11 +7,7 @@ struct ContentView: View {
     @EnvironmentObject var activeProfileManager: ActiveProfileManager
     @Environment(\.modelContext) var modelContext
     @Query var profiles: [Profile]
-    
-    // 1. INYECTAMOS EL GESTOR DE IDIOMA
-    @EnvironmentObject var languageManager: LanguageManager
-    
-    // 2. DETECTAR FASE DE ESCENA (Para notificaciones al salir)
+    @EnvironmentObject var languageManager: LanguageManager    
     @Environment(\.scenePhase) var scenePhase
     
     @State private var showingFirstTimeSetup: Bool = false
@@ -38,12 +34,10 @@ struct ContentView: View {
 
             VStack(spacing: 0) {
                 
-                // --- HEADER ---
                 ZStack {
-                    // CAPA 1: Título KAN (Centrado)
                     HStack {
                         Spacer()
-                        Text("KAN") // Se traduce si está en Localizable
+                        Text("KAN")
                             .font(.custom("LilitaOne", size: 50))
                             .fontWeight(.bold)
                             .foregroundColor(.black)
@@ -51,9 +45,7 @@ struct ContentView: View {
                     }
                     .padding(.top, 10)
 
-                    // CAPA 2: Elementos laterales
                     HStack {
-                        // LADO IZQUIERDO: PERFIL
                         NavigationLink(destination: SelectProfileView()) {
                             VStack(alignment: .center) {
                                 ZStack {
@@ -71,9 +63,8 @@ struct ContentView: View {
                             }
                         }
                         
-                        Spacer() // Empuja el siguiente botón a la derecha
+                        Spacer()
                         
-                        // LADO DERECHO: BOTÓN DE CAMBIO DE IDIOMA
                         Button(action: {
                             withAnimation {
                                 languageManager.toggleLanguage()
@@ -85,20 +76,19 @@ struct ContentView: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 50, height: 50)
-                                    .foregroundColor(.white.opacity(0.9)) // Globo blanco/claro
+                                    .foregroundColor(.white.opacity(0.9))
                                     .overlay(
-                                        Image(systemName: "bubble.left") // Borde negro
+                                        Image(systemName: "bubble.left")
                                             .resizable()
                                             .scaledToFit()
                                             .frame(width: 50, height: 50)
                                             .foregroundColor(.black)
                                     )
                                 
-                                // Texto ENG/ESP
                                 Text(languageManager.currentLanguage == "es" ? "ENG" : "ESP")
                                     .font(.system(size: 14, weight: .bold, design: .rounded))
                                     .foregroundColor(.black)
-                                    .offset(y: -3) // Ajuste para centrar en el globo
+                                    .offset(y: -3)
                             }
                         }
                         .padding(.trailing, 10)
@@ -109,12 +99,10 @@ struct ContentView: View {
                 
                 Spacer()
 
-                // LOGO
                 Image("CMICA")
                     .resizable().scaledToFit()
                     .frame(width: 350, height: 250).padding(.bottom, 40)
 
-                // --- BOTONES TRADUCIDOS ---
                 VStack(spacing: 20) {
                     let buttonColor = Color(red: 242 / 255.0, green: 86 / 255.0, blue: 150 / 255.0)
                     let color2 = Color(red: 235/255.0, green: 144/255.0, blue: 0/255.0)
@@ -150,10 +138,6 @@ struct ContentView: View {
         }
         .navigationBarTitle("")
         .navigationBarHidden(true)
-        // --- MAGIA DE IDIOMA ---
-        // Esto fuerza a toda la vista a cambiar de idioma al instante
-        //.environment(\.locale, .init(identifier: languageManager.currentLanguage))
-        //.id(languageManager.currentLanguage)
         
         .onAppear {
             if profiles.isEmpty { showingFirstTimeSetup = true }
@@ -161,7 +145,6 @@ struct ContentView: View {
             
             pedirPermisoNotificaciones()
         }
-        // Notificaciones al salir
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .background {
                 print("App en background: Programando notificación...")
@@ -181,12 +164,9 @@ struct ContentView: View {
             }
             .interactiveDismissDisabled()
             .modelContext(modelContext)
-            // Pasamos el idioma al sheet también
             .environment(\.locale, .init(identifier: languageManager.currentLanguage))
         }
     }
-    
-    // --- FUNCIONES DE NOTIFICACIÓN ---
     
     func pedirPermisoNotificaciones() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
@@ -197,8 +177,6 @@ struct ContentView: View {
     func programarNotificacionSalida() {
         let content = UNMutableNotificationContent()
         
-        // TRADUCCIÓN MANUAL PARA NOTIFICACIONES
-        // Como no son Vistas de SwiftUI, usamos NSLocalizedString
         let titulo = NSLocalizedString("¡Hora de jugar!", comment: "")
         let cuerpo = NSLocalizedString("¡Kids Anafilaxia niños te extraña!", comment: "")
         
@@ -206,7 +184,6 @@ struct ContentView: View {
         content.body = cuerpo
         content.sound = UNNotificationSound.default
 
-        // 10 segundos para probar
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
         let request = UNNotificationRequest(identifier: "regresaApp", content: content, trigger: trigger)
         
@@ -215,7 +192,6 @@ struct ContentView: View {
     }
 }
 
-// --- PREVIEW Y EXTENSIONES ---
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
