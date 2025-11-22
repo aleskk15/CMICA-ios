@@ -24,20 +24,14 @@ struct HistoriaView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.black)
                     }
-                    
                     Spacer()
-                    
-                    Text("Contar una historia")
+                    Text("Cuentos")
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
-                    
                     Spacer()
-                    
                     Image(systemName: "chevron.left")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .opacity(0)
+                        .font(.title2).fontWeight(.bold).opacity(0)
                 }
                 .padding()
                 .padding(.top, 40)
@@ -49,18 +43,21 @@ struct HistoriaView: View {
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                                 .foregroundColor(.black)
-                                .frame(maxWidth: .infinity)
+                                .multilineTextAlignment(.center)
                                 .padding()
+                                .frame(maxWidth: .infinity)
                                 .background(colorBarras)
                                 .cornerRadius(15)
                                 .padding(.horizontal)
+                        
                             Spacer()
                             
+                            // Portada
                             Image(historia.portada)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(maxHeight: 350)
-                                .padding(.vertical, 20)
+                                .cornerRadius(20)
                                 .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 5)
                             
                             Spacer()
@@ -85,7 +82,7 @@ struct HistoriaView: View {
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .always))
-                .indexViewStyle(.page(backgroundDisplayMode: .always)) 
+                .indexViewStyle(.page(backgroundDisplayMode: .always))
             }
             .ignoresSafeArea(edges: .top)
         }
