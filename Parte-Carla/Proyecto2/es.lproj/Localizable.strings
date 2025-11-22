@@ -1,0 +1,131 @@
+/* MENÚ PRINCIPAL */
+"Jugar" = "Jugar";
+"Seleccionar nivel" = "Seleccionar nivel";
+"Contar una historia" = "Contar una historia";
+"CONÓCENOS" = "CONÓCENOS";
+"Kids anafilaxia" = "Kids anafilaxia";
+
+/* ENCABEZADO Y PERFIL */
+"KAN" = "KAN";
+"Perfil" = "Perfil";
+
+/* NOTIFICACIONES */
+"¡Hora de jugar!" = "¡Hora de jugar!";
+"¡Kids Anafilaxia niños te extraña!" = "¡Kids Anafilaxia niños te extraña!";
+
+/* PANTALLA INFO */
+"CMICA" = "CMICA";
+"Colegio Mexicano de\n Inmunología Clínica y Alergia A.C." = "Colegio Mexicano de\n Inmunología Clínica y Alergia A.C.";
+"cmica_description" = "Fue fundado en 1946 y es el organismo que agrupa a todos los Médicos Especialistas en Alergia e Inmunología del país. Su principal función es promover el crecimiento académico y la educación médica continua de sus miembros mediante la organización de cursos de actualización, congresos nacionales e internacionales, simposios, talleres entre otros.";
+
+/*NIVELES*/
+"Niveles" = "Niveles";
+
+/*FORMULARIO*/
+"Crear Perfil (1/2)" = "Crear Perfil (1/2)";
+"Crear Perfil (2/2)" = "Crear Perfil (2/2)";
+"Editar Perfil (1/2)" = "Editar Perfil (1/2)";
+"Editar Perfil (2/2)" = "Editar Perfil (2/2)";
+"Nombre de usuario" = "Nombre de usuario";
+"Escribe el nombre aquí..." = "Escribe el nombre aquí...";
+"Siguiente" = "Siguiente";
+"Nombre" = "Nombre";
+"Nombre del niño/a" = "Nombre del niño/a";
+"Edad" = "Edad";
+"Años" = "Años";
+"Guardar Cambios" = "Guardar Cambios";
+"Eliminar Perfil" = "Eliminar Perfil";
+"Alergias" = "Alergias";
+"Foto de perfil" = "Foto de perfil";
+"Seleccionar alergia" = "Seleccionar alergia";
+"Ninguna" = "Ninguna";
+"Fondo" = "Fondo";
+
+/* ALERTA BORRAR */
+"confirm_delete_message" = "¿Estás seguro de que quieres eliminar el perfil %@? Esta acción no se puede deshacer.";
+"Eliminar" = "Eliminar";
+"Cancelar" = "Cancelar";
+
+/*ALERGIAS*/
+"Proteínas de leche de vaca" = "Proteínas de leche de vaca" ;
+"Huevo" = "Huevo";
+"Manzana" = "Manzana";
+"Pera" = "Pera";
+"Kiwi" = "Kiwi";
+"Mango" = "Mango";
+"Durazno" = "Durazno";
+"Plátano" = "Plátano";
+"Sandía" = "Sandía";
+"Papaya" = "Papaya";
+"Uva" = "Uva";
+"Naranja" = "Naranja";
+"Mandarina" = "Mandarina";
+"Higo" = "Higo";
+"Cereza" = "Cereza";
+"Ciruela" = "Ciruela";
+"Fresa" = "Fresa";
+"Melón" = "Melón";
+"Guayaba" = "Guayaba";
+"Coco" = "Coco";
+"Zanahoria" = "Zanahoria";
+"Apio" = "Apio";
+"Calabaza" = "Calabaza";
+"Calabacita" = "Calabacita";
+"Pepino" = "Pepino";
+"Aguacate" = "Aguacate";
+"Brocoli" = "Brocoli";
+"Coliflor" = "Coliflor";
+"Betabel" = "Betabel";
+"Cebolla" = "Cebolla";
+"Ajo" = "Ajo";
+"Esparrago" = "Esparrago";
+"Jitomate" = "Jitomate";
+"Tomate verde" = "Tomate verde";
+"Trigo" = "Trigo";
+"Maíz" = "Maíz";
+"Cebada" = "Cebada";
+"Centeno" = "Centeno";
+"Arroz" = "Arroz";
+"Avena" = "Avena";
+"Soya" = "Soya";
+"Garbanzo" = "Garbanzo";
+"Frijol" = "Frijol";
+"Lenteja" = "Lenteja";
+"Ejote" = "Ejote";
+"Alubia" = "Alubia";
+"Haba" = "Haba";
+"Avellana" = "Avellana";
+"Almendra" = "Almendra";
+"Pistache" = "Pistache";
+"Nuez de la india" = "Nuez de la india";
+"Nuez" = "Nuez";
+"Castaña" = "Castaña";
+"Piñon" = "Piñon";
+"Cacahuate" = "Cacahuate";
+"Pescado" = "Pescado";
+"Crustáceos" = "Crustáceos";
+"Cefalópodos" = "Cefalópodos";
+"De concha (Bivalvos)" = "De concha (Bivalvos)";
+
+/*SELECCIONAR PERFIL*/
+"Seleccionar perfil" = "Seleccionar perfil";
+"Añadir perfil" = "Añadir perfil"; 
+
+
+/*HISTORIA*/
+"Leer Historia" = "Leer Historia";
+
+
+/*INFORMACIÓN DEL PERFIL*/
+"Información\n del perfil" = "Información\n del perfil";
+"Nombre de Usuario" = "Nombre de Usuario";
+"Nombre" = "Nombre";
+"Edad" = "Edad";
+"años" = "años";
+"No especificada" = "No especificada";
+
+/* JUEGO */
+"Alérgico al: " = "Alérgico al: ";
+"Nada" = "Nada";
+"puntos" = "puntos";
+"Meta" = "Meta";

@@ -1,0 +1,128 @@
+/* MENÚ PRINCIPAL */
+"Jugar" = "Play";
+"Seleccionar nivel" = "Select Level";
+"Contar una historia" = "Tell a Story";
+"CONÓCENOS" = "ABOUT US";
+"Kids anafilaxia" = "Anaphylaxis Kids";
+
+/* ENCABEZADO Y PERFIL */
+"KAN" = "KAN";
+"Perfil" = "Profile";
+
+/* NOTIFICACIONES */
+"¡Hora de jugar!" = "It's play time!";
+"¡Kids Anafilaxia niños te extraña!" = "Anaphylaxis Kids misses you!";
+
+/* PANTALLA INFO (CMICA) */
+"CMICA" = "CMICA";
+"Colegio Mexicano de\n Inmunología Clínica y Alergia A.C." = "Mexican College of\n Clinical Immunology and Allergy A.C.";
+"cmica_description" = "Founded in 1946, it is the organization that brings together all Allergy and Immunology Specialists in the country. Its main function is to promote academic growth and continuous medical education for its members through refresher courses, national and international congresses, symposiums, workshops, among others.";
+
+"Niveles" = "Levels";
+
+/*FORMULARIO*/
+"Crear Perfil (1/2)" = "Create Profile (1/2)";
+"Crear Perfil (2/2)" = "Create Profile (2/2)";
+"Editar Perfil (1/2)" = "Edit Profile (1/2)";
+"Editar Perfil (2/2)" = "Edit Profile (2/2)";
+"Nombre de usuario" = "Username";
+"Escribe el nombre aquí..." = "Write the name here...";
+"Siguiente" = "Next";
+"Nombre" = "Name";
+"Nombre del niño/a" = "Child's Name";
+"Edad" = "Age";
+"Años" = "Years";
+"Guardar Cambios" = "Save Changes";
+"Eliminar Perfil" = "Delete Profile";
+"Alergias" = "Allergies";
+"Foto de perfil" = "Profile Photo";
+"Seleccionar alergia" = "Select allergy";
+"Ninguna" = "None";
+"Fondo" = "Background";
+
+/* ALERTA BORRAR */
+"confirm_delete_message" = "Are you sure you want to delete %@'s profile? This action cannot be undone.";
+"Eliminar" = "Delete";
+"Cancelar" = "Cancel";
+
+/*ALERGIAS*/
+"Proteínas de leche de vaca" = "Cow's Milk Proteins";
+"Huevo" = "Egg";
+"Manzana" = "Apple";
+"Pera" = "Pear";
+"Kiwi" = "Kiwi";
+"Mango" = "Mango";
+"Durazno" = "Peach";
+"Plátano" = "Banana";
+"Sandía" = "Watermelon";
+"Papaya" = "Papaya";
+"Uva" = "Grape";
+"Naranja" = "Orange";
+"Mandarina" = "Tangerine";
+"Higo" = "Fig";
+"Cereza" = "Cherry";
+"Ciruela" = "Plum";
+"Fresa" = "Strawberry";
+"Melón" = "Melon";
+"Guayaba" = "Guava";
+"Coco" = "Coconut";
+"Zanahoria" = "Carrot";
+"Apio" = "Celery";
+"Calabaza" = "Pumpkin";
+"Calabacita" = "Zucchini";
+"Pepino" = "Cucumber";
+"Aguacate" = "Avocado";
+"Brocoli" = "Broccoli";
+"Coliflor" = "Cauliflower";
+"Betabel" = "Beetroot";
+"Cebolla" = "Onion";
+"Ajo" = "Garlic";
+"Esparrago" = "Asparagus";
+"Jitomate" = "Tomato";
+"Tomate verde" = "Green Tomato";
+"Trigo" = "Wheat";
+"Maíz" = "Corn";
+"Cebada" = "Barley";
+"Centeno" = "Rye";
+"Arroz" = "Rice";
+"Avena" = "Oat";
+"Soya" = "Soy";
+"Garbanzo" = "Chickpea";
+"Frijol" = "Bean";
+"Lenteja" = "Lentil";
+"Ejote" = "Green Bean";
+"Alubia" = "White Bean";
+"Haba" = "Broad Bean";
+"Avellana" = "Hazelnut";
+"Almendra" = "Almond";
+"Pistache" = "Pistachio";
+"Nuez de la india" = "Cashew";
+"Nuez" = "Walnut";
+"Castaña" = "Chestnut";
+"Piñon" = "Pine Nut";
+"Cacahuate" = "Peanut";
+"Pescado" = "Fish";
+"Crustáceos" = "Crustaceans";
+"Cefalópodos" = "Cephalopods";
+"De concha (Bivalvos)" = "Shellfish (Bivalves)";
+
+/*SELECCIONAR PERFIL*/
+"Seleccionar perfil" = "Select Profile";
+"Añadir perfil" = "Add Profile";
+
+"Leer Historia" = "Read Story";
+
+
+/*INFORMACIÓN DEL PERFIL*/
+"Información\n del perfil" = "Profile\nInformation";
+"Nombre de Usuario" = "Username";
+"Nombre" = "Name";
+"Edad" = "Age";
+"años" = "years";
+"No especificada" = "Not specified";
+
+/* JUEGO */
+"Alérgico al: " = "Allergic to: ";
+"Nada" = "Nothing";
+"puntos" = "points";
+"Meta" = "Goal";

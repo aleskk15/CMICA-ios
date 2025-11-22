@@ -41,7 +41,7 @@ struct ProfileFormView_Step1: View {
                     }
                     Spacer()
                     Text(editingProfile == nil ? "Crear Perfil (1/2)" : "Editar Perfil (1/2)")
-                        .font(.title2).fontWeight(.bold).foregroundColor(.black)
+                        .font(.custom("LilitaOne",size: 35)).fontWeight(.bold).foregroundColor(.black)
                     Spacer()
                     Image(systemName: "chevron.left")
                         .font(.title2).fontWeight(.bold).opacity(0)
@@ -61,7 +61,7 @@ struct ProfileFormView_Step1: View {
                         )
                         
                         Text("Fondo")
-                            .font(.title2).fontWeight(.bold).foregroundColor(.black).padding(.top, 10)
+                            .font(.custom("LilitaOne",size:30)).fontWeight(.bold).foregroundColor(.black).padding(.top, 10)
 
                         HStack(spacing: 15) {
                             ForEach(backgroundColorsHex, id: \.self) { colorHex in
@@ -77,10 +77,10 @@ struct ProfileFormView_Step1: View {
                         }
                         
                         Text("Nombre de usuario")
-                            .font(.title2).fontWeight(.bold).foregroundColor(.black).padding(.top, 10)
+                            .font(.custom("LilitaOne", size:30)).fontWeight(.bold).foregroundColor(.black).padding(.top, 10)
                         
                         TextField("Escribe el nombre aquí...", text: $username)
-                            .font(.title3).padding()
+                            .font(.custom("LilitaOne",size:20)).padding()
                             .background(textFieldBackgroundColor)
                             .cornerRadius(30)
                             .overlay(RoundedRectangle(cornerRadius: 30).stroke(Color.black, lineWidth: 2))
@@ -93,7 +93,7 @@ struct ProfileFormView_Step1: View {
                             step1_colorHex: selectedColorHex
                         )) {
                             Text("Siguiente")
-                                .font(.title).fontWeight(.bold).foregroundColor(.white)
+                                .font(.custom("LilitaOne", size:40)).fontWeight(.bold).foregroundColor(.white)
                                 .frame(maxWidth: .infinity, minHeight: 60)
                                 .background(buttonColor)
                                 .cornerRadius(30)
@@ -131,6 +131,7 @@ struct ProfileFormView_Step2: View {
     
     @Environment(\.modelContext) var context
     @EnvironmentObject var activeProfileManager: ActiveProfileManager
+    @EnvironmentObject var languageManager: LanguageManager
     
     var editingProfile: Profile?
     
@@ -231,7 +232,7 @@ struct ProfileFormView_Step2: View {
                     }
                     Spacer()
                     Text(editingProfile == nil ? "Crear Perfil (2/2)" : "Editar Perfil (2/2)")
-                        .font(.title2).fontWeight(.bold).foregroundColor(.black)
+                        .font(.custom("LilitaOne",size: 35)).fontWeight(.bold).foregroundColor(.black)
                     Spacer()
                     Image(systemName: "chevron.left")
                         .font(.title2).fontWeight(.bold).opacity(0)
@@ -244,17 +245,17 @@ struct ProfileFormView_Step2: View {
                     VStack(alignment: .leading, spacing: 20) {
                         
                         Text("Nombre")
-                            .font(.title2).fontWeight(.bold).foregroundColor(.black)
+                            .font(.custom("LilitaOne",size: 30)).fontWeight(.bold).foregroundColor(.black)
                         TextField("Nombre del niño/a", text: $realName)
-                            .font(.title3).padding()
+                            .font(.custom("LilitaOne",size: 20)).padding()
                             .background(textFieldBackgroundColor)
                             .cornerRadius(30)
                             .overlay(RoundedRectangle(cornerRadius: 30).stroke(Color.black, lineWidth: 2))
 
                         Text("Edad")
-                            .font(.title2).fontWeight(.bold).foregroundColor(.black)
+                            .font(.custom("LilitaOne",size: 30)).fontWeight(.bold).foregroundColor(.black)
                         TextField("Años", text: $age)
-                            .font(.title3).padding()
+                            .font(.custom("LilitaOne",size: 20)).padding()
                             .background(textFieldBackgroundColor)
                             .cornerRadius(30)
                             .overlay(RoundedRectangle(cornerRadius: 30).stroke(Color.black, lineWidth: 2))
@@ -271,7 +272,7 @@ struct ProfileFormView_Step2: View {
                             isPresented = false
                         }) {
                             Text(editingProfile == nil ? "Crear Perfil" : "Guardar Cambios")
-                                .font(.title).fontWeight(.bold).foregroundColor(.white)
+                                .font(.custom("LilitaOne",size:35)).fontWeight(.bold).foregroundColor(.white)
                                 .frame(maxWidth: .infinity, minHeight: 60)
                                 .background(buttonColor)
                                 .cornerRadius(30)
@@ -285,7 +286,7 @@ struct ProfileFormView_Step2: View {
                                 showingDeleteAlert = true
                             }) {
                                 Text("Eliminar Perfil")
-                                    .font(.title).fontWeight(.bold)
+                                    .font(.custom("LilitaOne",size:40)).fontWeight(.bold)
                                     .foregroundColor(.white)
                                     .frame(maxWidth: .infinity, minHeight: 60)
                                     .background(Color.red)
@@ -313,15 +314,15 @@ struct ProfileFormView_Step2: View {
         }
         .alert(isPresented: $showingDeleteAlert) {
             Alert(
-                title: Text("Eliminar Perfil"),
-                message: Text("¿Estás seguro de que quieres eliminar el perfil \(editingProfile?.name ?? "")? Esta acción no se puede deshacer."),
-                primaryButton: .destructive(Text("Eliminar")) {
+                title: Text(LocalizedStringKey("Eliminar Perfil")),
+                message: Text(String(format: "confirm_delete_message".traducido(languageManager.currentLanguage), editingProfile?.name ?? "")),
+                primaryButton: .destructive(Text(LocalizedStringKey("Eliminar"))) {
                     if let profile = editingProfile {
                         context.delete(profile)
                         isPresented = false
                     }
                 },
-                secondaryButton: .cancel()
+                secondaryButton: .cancel(Text(LocalizedStringKey("Cancelar")))
             )
         }
     }
@@ -365,7 +366,7 @@ struct AllergySelectionSection: View {
     var body: some View {
         Group {
             Text("Alergias")
-                .font(.title2).fontWeight(.bold).foregroundColor(.black)
+                .font(.custom("LilitaOne",size: 30)).fontWeight(.bold).foregroundColor(.black)
 
             AllergyPickerList(
                 allAllergies: allAllergies,
@@ -387,7 +388,7 @@ struct ProfilePhotoGrid: View {
     var body: some View {
         Group {
             Text("Foto de perfil")
-                .font(.title2).fontWeight(.bold).foregroundColor(.black)
+                .font(.custom("LilitaOne",size:30)).fontWeight(.bold).foregroundColor(.black)
             
             LazyVGrid(columns: gridColumns, spacing: 20) {
                 ForEach(profileImages, id: \.self) { imageName in
@@ -467,8 +468,8 @@ struct AllergyPickerRow: View {
     
     var pickerLabel: some View {
         HStack {
-            Text(selectedAllergy.isEmpty ? "Seleccionar alergia" : selectedAllergy)
-                .font(.title3)
+            Text(selectedAllergy.isEmpty ? LocalizedStringKey("Seleccionar alergia") : LocalizedStringKey(selectedAllergy))
+                .font(.custom("LilitaOne", size: 20))
                 .foregroundColor(selectedAllergy.isEmpty ? .black.opacity(0.6) : .black)
             Spacer()
         }
@@ -480,9 +481,9 @@ struct AllergyPickerRow: View {
 
     var body: some View {
         Picker(selection: $selectedAllergy, label: pickerLabel) {
-            Text("Ninguna").tag("")
+            Text(LocalizedStringKey("Ninguna")).tag("")
             ForEach(allAllergies, id: \.self) { allergy in
-                Text(allergy).tag(allergy)
+                Text(LocalizedStringKey(allergy)).tag(allergy)
             }
         }
         .pickerStyle(MenuPickerStyle())

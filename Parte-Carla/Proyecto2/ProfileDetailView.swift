@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct InfoFieldView: View {
-    let label: String
+    let label: LocalizedStringKey
     let value: String
     
     let fieldBackgroundColor = Color.white
@@ -9,14 +9,14 @@ struct InfoFieldView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(label)
-                .font(.title2)
+                .font(.custom("LilitaOne", size: 30))
                 .fontWeight(.bold)
                 .foregroundColor(.black)
                 .padding(.leading, 20)
 
             HStack {
                 Text(value)
-                    .font(.title3)
+                    .font(.custom("LilitaOne", size: 20))
                     .foregroundColor(.black)
                 Spacer()
             }
@@ -36,6 +36,7 @@ struct ProfileDetailView: View {
     let profile: Profile
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var languageManager: LanguageManager
     
     let formBackgroundColor = Color(red: 242 / 255.0, green: 86 / 255.0, blue: 150 / 255.0)
     let fieldBackgroundColor = Color.white
@@ -100,16 +101,18 @@ struct ProfileDetailView: View {
                         .padding(.bottom, 20)
 
                         InfoFieldView(label: "Nombre de Usuario", value: profile.name)
-                            .font(.custom("LilitaOne",size:25))
                         
                         InfoFieldView(label: "Nombre", value: profile.realName)
-                            .font(.custom("LilitaOne",size:25))
                         
-                        InfoFieldView(label: "Edad", value: profile.age != nil ? "\(profile.age!) años" : "No especificada")
-                            .font(.custom("LilitaOne",size:25))
+                        InfoFieldView(
+                            label: "Edad",
+                            value: profile.age != nil
+                            ? "\(profile.age!) \("años".traducido(languageManager.currentLanguage))"
+                            : "No especificada".traducido(languageManager.currentLanguage)
+                        )
                         
                         Text("Alergias")
-                            .font(.custom("LilitaOne",size:25))
+                            .font(.custom("LilitaOne",size:30))
                             .padding(.bottom, -10)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
@@ -131,8 +134,8 @@ struct ProfileDetailView: View {
                         } else {
                             ForEach(profile.allergies, id: \.self) { allergy in
                                 HStack {
-                                    Text(allergy)
-                                        .font(.title3)
+                                    Text(LocalizedStringKey(allergy))
+                                        .font(.custom("LilitaOne", size: 20))
                                         .foregroundColor(.black)
                                     Spacer()
                                 }
