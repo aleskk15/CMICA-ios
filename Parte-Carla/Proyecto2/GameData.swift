@@ -85,7 +85,7 @@ class AlimentoRepository {
     
     private let todosLosAlimentos: [Alimento] = [
         Alimento(nombre: "hummus", imagenNombre: "hummus", alergenos: [.ajo, .garbanzo]),
-        Alimento(nombre: "pecado_ajo", imagenNombre: "pecado_ajo", alergenos: [.ajo, .pescado]),
+        Alimento(nombre: "pescado_ajo", imagenNombre: "pescado_ajo", alergenos: [.ajo, .pescado]),
         Alimento(nombre: "carne_ajo_mantequilla", imagenNombre: "carne_ajo_mantequilla", alergenos: [.ajo, .proteinasLecheVaca]),
         Alimento(nombre: "pan_ajo", imagenNombre: "pan_ajo", alergenos: [.ajo, .trigo, .huevo, .proteinasLecheVaca]),
         Alimento(nombre: "ajo", imagenNombre: "ajo", alergenos: [.ajo]),
@@ -97,11 +97,6 @@ class AlimentoRepository {
         
         Alimento(nombre: "calamar", imagenNombre: "calamar", alergenos: [.cefalopodos, .jitomate]),
         Alimento(nombre: "pulpo", imagenNombre: "pulpo", alergenos: [.cefalopodos, .jitomate]),
-        Alimento(nombre: "cefalopodos", imagenNombre: "cefalopodos", alergenos: [.cefalopodos]),
-        Alimento(nombre: "cefalopodos2", imagenNombre: "cefalopodos2", alergenos: [.cefalopodos]),
-        
-        Alimento(nombre: "pulpo", imagenNombre: "pulpo", alergenos: [.cefalopodos]),
-        Alimento(nombre: "calamar", imagenNombre: "calamar", alergenos: [.cefalopodos]),
         Alimento(nombre: "cefalopodos", imagenNombre: "cefalopodos", alergenos: [.cefalopodos]),
         Alimento(nombre: "cefalopodos2", imagenNombre: "cefalopodos2", alergenos: [.cefalopodos]),
         
@@ -141,8 +136,8 @@ class AlimentoRepository {
         Alimento(nombre: "nueces_india4", imagenNombre: "nueces_india4", alergenos: [.nuezDeLaIndia]),
         
         Alimento(nombre: "pistache", imagenNombre: "pistache", alergenos: [.pistache]),
-        Alimento(nombre: "pistache2", imagenNombre: "pistache3", alergenos: [.pistache]),
-        Alimento(nombre: "pistache2", imagenNombre: "pistache3", alergenos: [.pistache]),
+        Alimento(nombre: "pistache2", imagenNombre: "pistache2", alergenos: [.pistache]),
+        Alimento(nombre: "pistache3", imagenNombre: "pistache3", alergenos: [.pistache]),
         Alimento(nombre: "helado_pistache", imagenNombre: "helado_pistache", alergenos: [.pistache, .proteinasLecheVaca]),
         
         Alimento(nombre: "almendra", imagenNombre: "almendra", alergenos: [.almendra]),
@@ -165,7 +160,7 @@ class AlimentoRepository {
         Alimento(nombre: "ejote_cebolla_tomate", imagenNombre: "ejote_cebolla_tomate", alergenos: [.ejote, .cebolla]),
         
         Alimento(nombre: "alubia", imagenNombre: "alubia", alergenos: [.alubia]),
-        Alimento(nombre: "alubia_hervida", imagenNombre: "alubia_hervida", alergenos: [.alubia]),
+        Alimento(nombre: "alubias_hervidas", imagenNombre: "alubias_hervidas", alergenos: [.alubia]),
         Alimento(nombre: "alubia_apio_carne_tomate", imagenNombre: "alubia_apio_carne_tomate", alergenos: [.alubia, .jitomate, .apio]),
         Alimento(nombre: "alubias_lata_tomate", imagenNombre: "alubias_lata_tomate", alergenos: [.alubia, .jitomate]),
         
@@ -315,16 +310,16 @@ class AlimentoRepository {
         Alimento(nombre: "naranja2", imagenNombre: "naranja2", alergenos: [.naranja]),
         Alimento(nombre: "jugo_naranja", imagenNombre: "jugo_naranja", alergenos: [.naranja]),
         
-        Alimento(nombre: "uva", imagenNombre: "uva", alergenos: [.uva]),
-        Alimento(nombre: "jugo_uva", imagenNombre: "jugo_uva", alergenos: [.uva]),
+        Alimento(nombre: "uvas", imagenNombre: "uvas", alergenos: [.uva]),
+        Alimento(nombre: "jugo_uvas", imagenNombre: "jugo_uvas", alergenos: [.uva]),
         Alimento(nombre: "gelatina_uva", imagenNombre: "gelatina_uva", alergenos: [.uva, .proteinasLecheVaca]),
         
         Alimento(nombre: "papaya", imagenNombre: "papaya", alergenos: [.papaya]),
-        Alimento(nombre: "papaya2", imagenNombre: "papaya2", alergenos: [.papaya]),
-        Alimento(nombre: "papaya3", imagenNombre: "papaya3", alergenos: [.papaya]),
+        Alimento(nombre: "papaya2", imagenNombre: "papaya_2", alergenos: [.papaya]),
+        Alimento(nombre: "papaya3", imagenNombre: "papaya_3", alergenos: [.papaya]),
         Alimento(nombre: "jugo_papaya", imagenNombre: "jugo_papaya", alergenos: [.papaya]),
         
-        Alimento(nombre: "sandia", imagenNombre: "sandia", alergenos: [.sandia]),
+        Alimento(nombre: "sandia", imagenNombre: "sandía", alergenos: [.sandia]),
         Alimento(nombre: "sandia2", imagenNombre: "sandia2", alergenos: [.sandia]),
         Alimento(nombre: "sandia_chile", imagenNombre: "sandia_chile", alergenos: [.sandia]),
         Alimento(nombre: "agua_sandia", imagenNombre: "agua_sandia", alergenos: [.sandia]),
@@ -344,17 +339,17 @@ class AlimentoRepository {
         
         Alimento(nombre: "pera", imagenNombre: "pera", alergenos: [.pera]),
         Alimento(nombre: "pera_horno", imagenNombre: "pera_horno", alergenos: [.pera]),
-        Alimento(nombre: "juego_pera", imagenNombre: "juego_pera", alergenos: [.pera]),
+        Alimento(nombre: "jugo_pera", imagenNombre: "jugo_pera", alergenos: [.pera]),
         Alimento(nombre: "mermelada_pera", imagenNombre: "mermelada_pera", alergenos: [.pera]),
         
         Alimento(nombre: "kiwi", imagenNombre: "kiwi", alergenos: [.kiwi]),
         Alimento(nombre: "kiwi2", imagenNombre: "kiwi2", alergenos: [.kiwi]),
         Alimento(nombre: "kiwi3", imagenNombre: "kiwi3", alergenos: [.kiwi]),
-        Alimento(nombre: "kiwi4", imagenNombre: "kiwi4", alergenos: [.kiwi]),
+        Alimento(nombre: "kiwi4", imagenNombre: "jugo_kiwi", alergenos: [.kiwi]),
         
         Alimento(nombre: "manzana", imagenNombre: "manzana", alergenos: [.manzana]),
         Alimento(nombre: "jugo_manzana", imagenNombre: "jugo_manzana", alergenos: [.manzana]),
-        Alimento(nombre: "jugo_manzana", imagenNombre: "jugo_manzana", alergenos: [.manzana]),
+
         
         Alimento(nombre: "huevo", imagenNombre: "huevo", alergenos: [.huevo]),
         Alimento(nombre: "pastel", imagenNombre: "pastel", alergenos: [.huevo, .proteinasLecheVaca]),
