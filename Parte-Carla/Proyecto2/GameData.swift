@@ -117,7 +117,6 @@ class AlimentoRepository {
         
         Alimento(nombre: "castana", imagenNombre: "castana", alergenos: [.castana]),
         Alimento(nombre: "castana2", imagenNombre: "castana2", alergenos: [.castana]),
-        Alimento(nombre: "pure_castana", imagenNombre: "pure_castana", alergenos: [.castana]),
         Alimento(nombre: "castana_asada", imagenNombre: "castana_asada", alergenos: [.castana]),
         
         Alimento(nombre: "pinon", imagenNombre: "piñon", alergenos: [.pinon]),
@@ -225,9 +224,9 @@ class AlimentoRepository {
         Alimento(nombre: "calabacita_tomate", imagenNombre: "calabacita_tomate", alergenos: [.jitomate, .calabacita]),
         
         Alimento(nombre: "esparrago", imagenNombre: "esparrago", alergenos: [.esparrago]),
-        Alimento(nombre: "esparrago2", imagenNombre: "esparrago2", alergenos: [.esparrago]),
-        Alimento(nombre: "esparrago3", imagenNombre: "esparrago3", alergenos: [.esparrago]),
-        Alimento(nombre: "esparrago4", imagenNombre: "esparrago4", alergenos: [.esparrago]),
+        Alimento(nombre: "esparragos2", imagenNombre: "esparragos2", alergenos: [.esparrago]),
+        Alimento(nombre: "esparragos3", imagenNombre: "esparragos3", alergenos: [.esparrago]),
+        Alimento(nombre: "esparragos4", imagenNombre: "esparragos4", alergenos: [.esparrago]),
         
         Alimento(nombre: "coliflor", imagenNombre: "coliflor", alergenos: [.coliflor]),
         Alimento(nombre: "coliflor_queso", imagenNombre: "coliflor_queso", alergenos: [.coliflor,.proteinasLecheVaca]),
@@ -252,7 +251,7 @@ class AlimentoRepository {
         Alimento(nombre: "agua_pepino_limon", imagenNombre: "agua_pepino_limon", alergenos: [.pepino]),
         
         Alimento(nombre: "calabacita", imagenNombre: "calabacita", alergenos: [.calabacita]),
-        Alimento(nombre: "calabacita2", imagenNombre: "calabacita2", alergenos: [.calabacita]),
+        Alimento(nombre: "calabacitas2", imagenNombre: "calabacitas2", alergenos: [.calabacita]),
         Alimento(nombre: "calabacita_asada", imagenNombre: "calabacita_asada", alergenos: [.calabacita]),
         
         Alimento(nombre: "calabaza", imagenNombre: "calabaza", alergenos: [.calabaza]),
@@ -293,13 +292,13 @@ class AlimentoRepository {
         Alimento(nombre: "cerdo_ciruela_piñon", imagenNombre: "cerdo_ciruela_piñon", alergenos: [.ciruela]),
         
         Alimento(nombre: "cereza", imagenNombre: "cereza", alergenos: [.cereza]),
-        Alimento(nombre: "cereza2", imagenNombre: "cereza2", alergenos: [.cereza]),
-        Alimento(nombre: "cereza3", imagenNombre: "cereza3", alergenos: [.cereza]),
+        Alimento(nombre: "cerezas2", imagenNombre: "cerezas2", alergenos: [.cereza]),
+        Alimento(nombre: "cerezas3", imagenNombre: "cerezas3", alergenos: [.cereza]),
         
         Alimento(nombre: "higo", imagenNombre: "higo", alergenos: [.higo]),
-        Alimento(nombre: "higo2", imagenNombre: "higo2", alergenos: [.higo]),
-        Alimento(nombre: "higo3", imagenNombre: "higo3", alergenos: [.higo]),
-        Alimento(nombre: "higo4", imagenNombre: "higo4", alergenos: [.higo]),
+        Alimento(nombre: "higos2", imagenNombre: "higos2", alergenos: [.higo]),
+        Alimento(nombre: "higos3", imagenNombre: "higos3", alergenos: [.higo]),
+        Alimento(nombre: "higos4", imagenNombre: "higos4", alergenos: [.higo]),
         
         Alimento(nombre: "mandarina", imagenNombre: "mandarina", alergenos: [.mandarina]),
         Alimento(nombre: "mandarina2", imagenNombre: "mandarina2", alergenos: [.mandarina]),
@@ -319,7 +318,7 @@ class AlimentoRepository {
         Alimento(nombre: "papaya3", imagenNombre: "papaya_3", alergenos: [.papaya]),
         Alimento(nombre: "jugo_papaya", imagenNombre: "jugo_papaya", alergenos: [.papaya]),
         
-        Alimento(nombre: "sandia", imagenNombre: "sandía", alergenos: [.sandia]),
+        Alimento(nombre: "sandia", imagenNombre: "sandia", alergenos: [.sandia]),
         Alimento(nombre: "sandia2", imagenNombre: "sandia2", alergenos: [.sandia]),
         Alimento(nombre: "sandia_chile", imagenNombre: "sandia_chile", alergenos: [.sandia]),
         Alimento(nombre: "agua_sandia", imagenNombre: "agua_sandia", alergenos: [.sandia]),
@@ -329,7 +328,7 @@ class AlimentoRepository {
         
         Alimento(nombre: "durazno", imagenNombre: "durazno", alergenos: [.durazno]),
         Alimento(nombre: "duraznos_crema", imagenNombre: "duraznos_crema", alergenos: [.durazno, .proteinasLecheVaca]),
-        Alimento(nombre: "durazno_lata", imagenNombre: "durazno_lata", alergenos: [.durazno]),
+        Alimento(nombre: "durazno_lata", imagenNombre: "duraznos_lata", alergenos: [.durazno]),
         Alimento(nombre: "jugo_durazno", imagenNombre: "jugo_durazno", alergenos: [.durazno]),
         
         Alimento(nombre: "mango", imagenNombre: "mango", alergenos: [.mango]),
