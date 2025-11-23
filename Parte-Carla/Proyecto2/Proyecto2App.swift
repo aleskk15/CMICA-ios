@@ -8,6 +8,7 @@ struct Proyecto2App: App {
     @StateObject private var languageManager = LanguageManager()
 
     var body: some Scene {
+    
         WindowGroup {
             NavigationView {
                 ContentView()
