@@ -1,7 +1,20 @@
 import SwiftUI
 
 class LanguageManager: ObservableObject {
-    @Published var currentLanguage: String = "es"
+    
+    @AppStorage("selectedLanguage") var currentLanguage: String = "es"
+        
+    init() {
+        if UserDefaults.standard.object(forKey: "selectedLanguage") == nil {
+            let idiomaDispositivo = Locale.current.language.languageCode?.identifier ?? "es"
+                
+            if idiomaDispositivo.hasPrefix("en") {
+                currentLanguage = "en"
+            } else {
+                currentLanguage = "es"
+            }
+        }
+    }
     
     func toggleLanguage() {
         if currentLanguage == "es" {

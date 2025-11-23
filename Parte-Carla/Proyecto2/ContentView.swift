@@ -120,7 +120,7 @@ struct ContentView: View {
                     }
 
                     NavigationLink(destination: HistoriaView()) {
-                        Text("Contar una historia")
+                        Text("Historias")
                             .font(.custom("LilitaOne",size:28)).fontWeight(.bold).foregroundColor(.white)
                             .frame(width: 250, height: 60).background(buttonColor).cornerRadius(30)
                     }

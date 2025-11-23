@@ -31,9 +31,9 @@ struct HistoriaView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.black)*/
                     
-                    Text("Contar una historia")
+                    Text("Historias")
                         .padding(.top,15)
-                        .font(.custom("LilitaOne", size:35))
+                        .font(.custom("LilitaOne", size:40))
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                         .padding(.bottom,8)
