@@ -2,6 +2,7 @@ import SwiftUI
 
 struct CuentoView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var languageManager: LanguageManager
     
     let historia: HistoriaData
     
@@ -25,8 +26,8 @@ struct CuentoView: View {
                         
                         VStack {
                             ScrollView {
-                                Text(pagina.text)
-                                    .font(.title3)
+                                Text(pagina.textKey.traducido(languageManager.currentLanguage))
+                                    .font(.custom("LilitaOne",size:25))
                                     .fontWeight(.medium)
                                     .foregroundColor(.black)
                                     .multilineTextAlignment(.center)

@@ -129,3 +129,85 @@
 "Nada" = "Nada";
 "puntos" = "puntos";
 "Meta" = "Meta";
+
+/* --- CUENTOS (ESPAÑOL) --- */
+
+/* HISTORIA 1: UN DÍA NORMAL */
+"story1_title" = "Un día normal";
+"story1_p1" = "Sofi era una niña alegre que amaba dibujar y jugar con su perro Max. Ella tenía alergia alimentaria, pero sabía cuidarse muy bien.";
+"story1_p2" = "Su mamá siempre le decía: 'Sofi, si algún día tienes una reacción fuerte llamada anafilaxia, recuerda el superplan'.";
+"story1_p3" = "Un día, Sofi fue a una fiesta de cumpleaños. Todo se veía delicioso y había muchos postres. Ella preguntó cuáles podía comer...";
+"story1_p4" = "...pero sin querer probó uno que tenía el alimento al que era alérgica.";
+"story1_p5" = "Poco después comenzó a sentir la garganta apretada, la piel caliente con ronchitas, respiración pesada y un mareo raro.";
+"story1_p6" = "Sofi recordó el Superplan de Emergencia. Pensó: 'Estos son los síntomas que me explicaron… Creo que es una anafilaxia'.";
+"story1_p7" = "Sabía que debía actuar rápido. Tomó su autoinyector de adrenalina, lo colocó en su muslo y presionó hasta sentir el clic.";
+"story1_p8" = "Le dijo a la mamá de la cumpleañera: 'Por favor, llamen al servicio de emergencias. Estoy teniendo una reacción fuerte'.";
+"story1_p9" = "Mientras esperaban, Sofi se acostó con cuidado. 'No debo caminar ni moverme mucho', recordó. Un amigo se quedó a su lado.";
+"story1_p10" = "Pasaron unos minutos y no se sentía mejor. La mamá de la cumpleañera le aplicó el segundo autoinyector, tal como decía el plan.";
+"story1_p11" = "Cuando llegó la ambulancia, Sofi subió acompañada. Sabía que siempre debía ser revisada por médicos, aunque ya se sintiera mejor.";
+"story1_p12" = "En el hospital, los médicos la atendieron rápidamente y todo salió bien.";
+"story1_p13" = "Mientras descansaba, pensó: 'Hoy usé mi plan y funcionó. No fue fácil, pero lo logré'.";
+"story1_p14" = "Al día siguiente, dibujó un cartel con todos los pasos de emergencia. 'Así nadie se asusta y todos saben qué hacer', dijo sonriendo.";
+"story1_p15" = "Desde entonces, Sofi siguió yendo a fiestas y jugando, segura de que conocía su cuerpo y sabía cómo cuidarse.";
+
+/* HISTORIA 2: LULI LA TORTUGA */
+"story2_title" = "Luli la tortuga";
+"story2_p1" = "Había una vez una tortuga llamada Luli, que amaba bailar, leer libros y comer galletas de chispas de chocolate.";
+"story2_p2" = "Un día, mientras estaba en el recreo, comió una galleta nueva que trajo un amigo… con mucha curiosidad.";
+"story2_p3" = "¡Pum! De repente empezó a sentirse rara: le picaba la boca, la piel se le puso roja y sintió que su corazón latía más rápido.";
+"story2_p4" = "La maestra la llevó rápido con la enfermera para que la revisaran de inmediato.";
+"story2_p5" = "El doctor le explicó: 'Luli, tienes una alergia alimentaria'. Tenían que identificar qué alimento le causó daño.";
+"story2_p6" = "Luli dijo: '¡Entonces seré un detective de comida!'. Aprendió a buscar en etiquetas: 'Contiene nueces' o 'trazas'.";
+"story2_p7" = "Luli pensó: 'Si dice eso… ¡puede hacerme daño!'. Así evitaba accidentes como un verdadero héroe experto.";
+"story2_p8" = "Aprendió a avisar a todos: familia, escuela, amigos y a la señora del comedor. Ahora todos sabían cómo cuidarla.";
+"story2_p9" = "Aprendió los síntomas: picazón, ronchitas, hinchazón, dificultad para respirar o dolor de estómago.";
+"story2_p10" = "Aprendió que al primer indicio de un síntoma lo mejor es avisar a un adulto responsable.";
+"story2_p11" = "Luli dijo: '¡Ahora conozco mis poderes!'. Vivió feliz sabiendo que tener una alergia no la hacía menos fuerte, solo más valiente.";
+
+/* HISTORIA 3: COPITO EL CONEJO */
+"story3_title" = "Copito el conejo";
+"story3_p1" = "Había una vez un conejito pequeño llamado Copito, que vivía feliz en su madriguera.";
+"story3_p2" = "Vivía con sus papás y sus hermanitos: Nubecita, Brinco y Orejitas. ¡Le encantaba la cocina!";
+"story3_p3" = "Un día, mamá preparó un pastel de zanahoria. Todos aplaudieron emocionados.";
+"story3_p4" = "Copito probó el pastel y sintió un leve cosquilleo en la boca. 'Seguro es mi imaginación', pensó, y siguió comiendo.";
+"story3_p5" = "Al día siguiente, probó sopa de zanahoria. Su boca volvió a picarle y también su garganta. Se preocupó, pero no dijo nada.";
+"story3_p6" = "Unos días después, comió zanahorias asadas. Esta vez fue diferente: su garganta se cerró y le costaba respirar.";
+"story3_p7" = "Su corazón latía rápido. '¡Mamá… papá… no puedo… respirar!', logró decir muy asustado.";
+"story3_p8" = "Su papá lo tomó en brazos y corrieron lo más rápido posible al Hospital del Prado.";
+"story3_p9" = "Los doctores lo vieron muy mal. '¡Rápido, es una anafilaxia!', gritó una doctora.";
+"story3_p10" = "Después del tratamiento, Copito se sintió mejor. Mamá le acariciaba la oreja: 'Todo está bien, pequeño, ya estás a salvo'.";
+"story3_p11" = "El doctor Zorro explicó que fue una alergia a la zanahoria y les enseñó los síntomas: picazón, hinchazón, tos o dificultad para respirar.";
+"story3_p12" = "Copito bajó la mirada: 'Yo sí sentía cosas raras… pero pensé que no era importante'. El doctor le dijo que siempre debía escuchar a su cuerpo.";
+"story3_p13" = "De regreso, Copito veía a su familia comer zanahorias y se sentía triste. 'Extraño comer como todos… ¿Por qué yo?', pensó.";
+"story3_p14" = "En el hospital, conoció a un ratón, una ardilla y un mapache. Todos tenían alergias diferentes: fresas, nueces, polen.";
+"story3_p15" = "Copito se sorprendió: '¿No soy el único?'. Ellos le contaron que aprendieron a cuidarse y eran muy felices.";
+"story3_p16" = "Mamá encontró nuevas recetas: pastel de manzana y galletas de avena. Copito probó y sus ojos brillaron. ¡Estaba delicioso!";
+"story3_p17" = "Desde entonces, Copito avisa si siente algo raro, revisa ingredientes y lleva sus medicinas. Se siente fuerte y seguro.";
+"story3_p18" = "Copito entendió que tener alergia no lo hace diferente, ¡lo hace valiente! Vivió feliz rodeado de su familia.";
+
+/* HISTORIA 4: PIKO */
+"story4_title" = "Piko no puede comer flores";
+"story4_p1" = "Piko no puede comer flores.";
+"story4_p2" = "Cuando Piko era pequeño se sentía mal al comer ensaladas.";
+"story4_p3" = "Piko fue al doctor de alergias y él le dijo que el problema eran las flores.";
+"story4_p4" = "— ¡Eres alérgico a las flores! — le dijo el doctor — ¡Si comes flores vas a enfermar! — añadió.";
+"story4_p5" = "— ¡No quiero sentirme mal! — dijo Piko muy asustado — ¡Calma!, ¡solo tienes que seguir mis consejos! - dijo el doctor.";
+"story4_p6" = "¡Nunca metas flores en tu boca!";
+"story4_p7" = "Cuando prepares tu comida, ¡no añadas flores!";
+"story4_p8" = "Si alguien más te da tu comida, pregunta, ¿Esto tiene flores?";
+"story4_p9" = "Habla con tu familia y amigos y diles que no puedes comer flores.";
+"story4_p10" = "Aprendió los síntomas: picazón, ronchitas, hinchazón, dificultad para respirar o dolor de estómago. ¡Asegúrate de que tus personas cercanas conozcan cuales son los síntomas de tu alergia! También ayúdales a identificar cuando tienes una emergencia y cómo colocar adrenalina.";
+"story4_p11" = "— ¡Gracias doctor! — dijo Piko — Ahora sé que debo hacer.";
+
+/* HISTORIA 5: JUGANDO EN EL PARQUE */
+"story5_title" = "Jugando en el parque";
+"story5_p1" = "Un día, Ann estaba en un picnic en el parque con su amigo Ju.";
+"story5_p2" = "Los dos estaban comiendo tranquilamente, cuando de repente, ¡Ju comenzó a marearse y se desmayó!";
+"story5_p3" = "Ann no entendía que sucedía, hasta que vió la galleta que Ju estaba comiendo, ¡las galletas tenían nueces y Ju es alérgico!";
+"story5_p4" = "Por suerte, Ann recordó que Ju tenía adrenalina en su mochila, así que rápidamente la sacó y se la colocó en el muslo.";
+"story5_p5" = "Ju ya había explicado a sus compañeros de clase y a su maestra que era alérgico a las nueces.";
+"story5_p6" = "Cómo Ann siempre jugaba con Ju, ella decidió aprender a colocar adrenalina, en caso de que sucediera alguna emergencia.";
+"story5_p7" = "Ann llamó a una ambulancia y llevaron a Ju al hospital.";
+"story5_p8" = "En el hospital, el doctor de las alergias visitó a Ju y lo revisó, ¡afortunadamente Ju se recuperó!";
+"story5_p9" = "Ann se sintió muy afortunada de que pudo ayudar a su amigo cuando él la necesitaba.";
+"story5_p10" = "Desde ese día Ann verifica que las galletas que compra no tengan nueces.";

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HistoriaView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var languageManager: LanguageManager
     
     let colorFondo = Color(red: 90/255, green: 84/255, blue: 137/255)
     let colorBarras = Color(red: 111/255, green: 105/255, blue: 156/255)
@@ -25,10 +26,10 @@ struct HistoriaView: View {
                             .foregroundColor(.black)
                     }
                     Spacer()
-                    Text("Cuentos")
+                    /*Text("Cuentos")
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundColor(.black)
+                        .foregroundColor(.black)*/
                     
                     Text("Contar una historia")
                         .padding(.top,15)
@@ -47,7 +48,7 @@ struct HistoriaView: View {
                 TabView {
                     ForEach(historias) { historia in
                         VStack {
-                            Text(historia.titulo)
+                            Text(historia.tituloKey.traducido(languageManager.currentLanguage))
                                 .font(.custom("LilitaOne", size:40))
                                 .fontWeight(.bold)
                                 .foregroundColor(.black)

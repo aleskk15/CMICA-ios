@@ -126,3 +126,84 @@
 "Nada" = "Nothing";
 "puntos" = "points";
 "Meta" = "Goal";
+
+/* HISTORIA: UN DÍA NORMAL */
+"story1_title" = "A Normal Day";
+"story1_p1" = "Sofi was a cheerful girl who loved to draw and play with her dog Max. She had a food allergy, but she knew how to take care of herself very well.";
+"story1_p2" = "Her mom always told her: 'Sofi, if you ever have a strong reaction called anaphylaxis, remember the super plan.'";
+"story1_p3" = "One day, Sofi went to a birthday party. Everything looked delicious and there were many desserts. She asked which ones she could eat...";
+"story1_p4" = "...but accidentally tried one that had the food she was allergic to.";
+"story1_p5" = "Soon after, her throat started feeling tight, her skin felt hot with hives, her breathing became heavy, and she felt a strange dizziness.";
+"story1_p6" = "Sofi remembered the Emergency Super Plan. She thought: 'These are the symptoms they explained to me... I think it's anaphylaxis.'";
+"story1_p7" = "She knew she had to act fast. She took her adrenaline auto-injector, placed it on her thigh, and pressed until she felt the click.";
+"story1_p8" = "She told the birthday girl's mom: 'Please call emergency services. I'm having a severe reaction.'";
+"story1_p9" = "While waiting, Sofi lay down carefully. 'I shouldn't walk or move much,' she remembered. A friend stayed by her side.";
+"story1_p10" = "Minutes passed and she didn't feel better. The mom applied the second auto-injector, just as the plan said.";
+"story1_p11" = "When the ambulance arrived, Sofi got in accompanied. She knew she always had to be checked by doctors, even if she felt better.";
+"story1_p12" = "At the hospital, the doctors attended to her quickly and everything went well.";
+"story1_p13" = "While resting, she thought: 'Today I used my plan and it worked. It wasn't easy, but I did it.'";
+"story1_p14" = "The next day, she drew a poster with all the emergency steps. 'So no one gets scared and everyone knows what to do,' she said smiling.";
+"story1_p15" = "Since then, Sofi continued going to parties and playing, confident that she knew her body and how to take care of herself.";
+
+/* HISTORIA: LULI LA TORTUGA */
+"story2_title" = "Luli the Turtle";
+"story2_p1" = "Once upon a time there was a turtle named Luli, who loved dancing, reading books, and eating chocolate chip cookies.";
+"story2_p2" = "One day, while at recess, she ate a new cookie that a friend brought... with great curiosity.";
+"story2_p3" = "Boom! Suddenly she started feeling weird: her mouth was itchy, her skin turned red, and she felt her heart beating faster.";
+"story2_p4" = "The teacher quickly took her to the nurse to be checked immediately.";
+"story2_p5" = "The doctor explained: 'Luli, you have a food allergy.' They had to identify which food caused the harm.";
+"story2_p6" = "Luli said: 'Then I'll be a food detective!' She learned to look on labels for: 'Contains nuts' or 'traces'.";
+"story2_p7" = "Luli thought: 'If it says that... it can hurt me!' That way she avoided accidents like a true expert hero.";
+"story2_p8" = "She learned to warn everyone: family, school, friends, and the lunch lady. Now everyone knew how to take care of her.";
+"story2_p9" = "She learned the symptoms: itching, hives, swelling, difficulty breathing, or stomach ache.";
+"story2_p10" = "She learned that at the first sign of a symptom, the best thing is to tell a responsible adult.";
+"story2_p11" = "Luli said: 'Now I know my powers!' She lived happily knowing that having an allergy didn't make her less strong, only braver.";
+
+/* HISTORIA: COPITO EL CONEJO */
+"story3_title" = "Copito the Rabbit";
+"story3_p1" = "Once upon a time there was a small rabbit named Copito, who lived happily in his burrow.";
+"story3_p2" = "He lived with his parents and siblings: Nubecita, Brinco, and Orejitas. He loved cooking!";
+"story3_p3" = "One day, mom baked a carrot cake. Everyone clapped excitedly.";
+"story3_p4" = "Copito tasted the cake and felt a slight tickle in his mouth. 'It's probably my imagination,' he thought, and kept eating.";
+"story3_p5" = "The next day, he tried carrot soup. His mouth itched again and his throat too. He got worried, but said nothing.";
+"story3_p6" = "A few days later, he ate roasted carrots. This time it was different: his throat closed up and it was hard to breathe.";
+"story3_p7" = "His heart was beating fast. 'Mom... Dad... I can't... breathe!' he managed to say, very scared.";
+"story3_p8" = "His dad took him in his arms and they ran as fast as possible to Prado Hospital.";
+"story3_p9" = "The doctors saw he was very ill. 'Quick, it's anaphylaxis!' shouted a doctor.";
+"story3_p10" = "After the treatment, Copito felt better. Mom stroked his ear: 'Everything is fine, little one, you are safe now.'";
+"story3_p11" = "Doctor Fox explained it was an allergy to carrots and taught them the symptoms: itching, swelling, coughing, or difficulty breathing.";
+"story3_p12" = "Copito looked down: 'I did feel weird things... but I thought it wasn't important.' The doctor told him he should always listen to his body.";
+"story3_p13" = "On the way back, Copito saw his family eating carrots and felt sad. 'I miss eating like everyone else... Why me?' he thought.";
+"story3_p14" = "In the hospital, he met a mouse, a squirrel, and a raccoon. They all had different allergies: strawberries, nuts, pollen.";
+"story3_p15" = "Copito was surprised: 'I'm not the only one?' They told him they learned to take care of themselves and were very happy.";
+"story3_p16" = "Mom found new recipes: apple pie and oatmeal cookies. Copito tasted them and his eyes lit up. It was delicious!";
+"story3_p17" = "Since then, Copito warns if he feels something strange, checks ingredients, and carries his medicine. He feels strong and safe.";
+"story3_p18" = "Copito understood that having an allergy doesn't make him different, it makes him brave! He lived happily surrounded by his family.";
+
+/* HISTORIA: PIKO */
+"story4_title" = "Piko Can't Eat Flowers";
+"story4_p1" = "Piko can't eat flowers.";
+"story4_p2" = "When Piko was little he felt sick when eating salads.";
+"story4_p3" = "Piko went to the allergy doctor and he told him the problem was flowers.";
+"story4_p4" = "'You are allergic to flowers!' said the doctor. 'If you eat flowers you'll get sick!' he added.";
+"story4_p5" = "'I don't want to feel sick!' said Piko, very scared. 'Calm down! You just have to follow my advice!' said the doctor.";
+"story4_p6" = "Never put flowers in your mouth!";
+"story4_p7" = "When you prepare your food, don't add flowers!";
+"story4_p8" = "If someone else gives you food, ask: Does this have flowers?";
+"story4_p9" = "Talk to your family and friends and tell them you can't eat flowers.";
+"story4_p10" = "He learned the symptoms: itching, hives, swelling, difficulty breathing, or stomach ache. Make sure your close ones know what your allergy symptoms are! Also help them identify when you have an emergency and how to use adrenaline.";
+"story4_p11" = "'Thank you doctor!' said Piko. 'Now I know what to do.'";
+
+/* HISTORIA: JUGANDO EN EL PARQUE */
+"story5_title" = "Playing in the Park";
+"story5_p1" = "One day, Ann was at a picnic in the park with her friend Ju.";
+"story5_p2" = "They were both eating quietly, when suddenly, Ju started feeling dizzy and fainted!";
+"story5_p3" = "Ann didn't understand what was happening, until she saw the cookie Ju was eating. The cookies had nuts and Ju is allergic!";
+"story5_p4" = "Luckily, Ann remembered Ju had adrenaline in his backpack, so she quickly took it out and placed it on his thigh.";
+"story5_p5" = "Ju had already explained to his classmates and teacher that he was allergic to nuts.";
+"story5_p6" = "Since Ann always played with Ju, she decided to learn how to use adrenaline, in case an emergency happened.";
+"story5_p7" = "Ann called an ambulance and they took Ju to the hospital.";
+"story5_p8" = "At the hospital, the allergy doctor visited Ju and checked him. Fortunately, Ju recovered!";
+"story5_p9" = "Ann felt very lucky that she could help her friend when he needed her.";
+"story5_p10" = "From that day on, Ann verifies that the cookies she buys don't have nuts.";
+
