@@ -18,6 +18,8 @@ struct Proyecto2App: App {
             
             .environment(\.locale, .init(identifier: languageManager.currentLanguage))
             .id(languageManager.currentLanguage)
+            .navigationViewStyle(.stack)
+            .preferredColorScheme(.light)
         }
         .modelContainer(sharedModelContainer)
     }
