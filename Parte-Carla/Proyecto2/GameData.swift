@@ -361,8 +361,6 @@ class AlimentoRepository {
     ]
     
     
-
-    
     func generarSetDeAlimentos(alergiasJugador: [String], gameSize: CGSize) -> [Alimento] {
         var setDeAlimentos: [Alimento] = []
         

@@ -53,6 +53,9 @@ struct JuegoView: View {
     @State private var mensajePuntosTexto: String = ""
     @State private var mensajePuntosOffset: CGFloat = 0
     
+    @State private var showModal: Bool = false
+    @State private var playerWon: Bool = false
+    
     private let alimentoRepo = AlimentoRepository()
     @State private var gameAreaSize: CGSize = .zero
     
@@ -60,16 +63,15 @@ struct JuegoView: View {
     @State private var roundTimeRemaining: Int = 2
     
     var targetPuntos: Int {
-            let basePuntos = 50
-            let incrementoPorNivel = 30
-            return basePuntos + (incrementoPorNivel * (nivelNumero - 1))
-        }
+        let basePuntos = 50
+        let incrementoPorNivel = 30
+        return basePuntos + (incrementoPorNivel * (nivelNumero - 1))
+    }
     
     let loseThreshold: Int = -15
     
     @State private var isGameFinished: Bool = false
     
-
     var body: some View {
         GeometryReader { geo in
             ZStack {
@@ -87,11 +89,11 @@ struct JuegoView: View {
                         }
                         Text("Alérgico al: ").font(.custom("LilitaOne",size:30)).fontWeight(.bold).foregroundColor(.white)
                         Text(activeProfile.allergies.isEmpty
-                                                     ? "Nada".traducido(languageManager.currentLanguage)
-                                                     : activeProfile.allergies.map { $0.traducido(languageManager.currentLanguage) }.joined(separator: ", ")
-                                                )
-                            .font(.custom("LilitaOne", size: 30)).fontWeight(.bold).foregroundColor(.white)
-                            .lineLimit(1)
+                             ? "Nada".traducido(languageManager.currentLanguage)
+                             : activeProfile.allergies.map { $0.traducido(languageManager.currentLanguage) }.joined(separator: ", ")
+                        )
+                        .font(.custom("LilitaOne", size: 30)).fontWeight(.bold).foregroundColor(.white)
+                        .lineLimit(1)
                         Spacer()
                     }
                     .padding(.horizontal)
@@ -105,19 +107,16 @@ struct JuegoView: View {
                         .shadow(color: .black.opacity(0.7), radius: 3, y: 3)
                         .padding(.vertical, 10)
                     
-                    
                     Text("\("Meta".traducido(languageManager.currentLanguage)): \(targetPuntos)")
                         .font(.custom("LilitaOne", size: 25)).fontWeight(.bold)
                         .foregroundColor(.white.opacity(0.8))
                         .shadow(color: .black.opacity(0.5), radius: 2, y: 2)
                         .padding(.bottom, 10)
                     
-                    
                     Spacer()
                 }
                 .ignoresSafeArea(edges: .top)
 
-                
                 ForEach(alimentosEnPantalla) { alimento in
                     Image(alimento.imagenNombre)
                         .resizable().scaledToFit()
@@ -150,6 +149,50 @@ struct JuegoView: View {
                         .position(x: geo.size.width / 2, y: geo.size.height / 2 + mensajePuntosOffset)
                         .opacity(1.0 - (Double(mensajePuntosOffset) / 50.0))
                 }
+                
+                if showModal {
+                    Color.black.opacity(0.6).edgesIgnoringSafeArea(.all) // Fondo oscuro
+                    
+                    VStack(spacing: 20) {
+                        Text(playerWon ? "win_title".traducido(languageManager.currentLanguage) : "lose_title".traducido(languageManager.currentLanguage))
+                            .font(.custom("LilitaOne", size: 35))
+                            .foregroundColor(playerWon ? Color(red: 76/255, green: 175/255, blue: 80/255) : Color(red: 244/255, green: 67/255, blue: 54/255))
+                            .multilineTextAlignment(.center)
+                        
+                        Text("\("Final Score:".traducido(languageManager.currentLanguage)) \(puntos)")
+                            .font(.custom("LilitaOne", size: 28))
+                            .foregroundColor(.black)
+                        
+                        if !playerWon {
+                            Text("\("You need:".traducido(languageManager.currentLanguage)) \(targetPuntos) \("puntos".traducido(languageManager.currentLanguage)).")
+                                .font(.custom("LilitaOne", size: 20))
+                                .foregroundColor(.gray)
+                            
+                            Text("\("Meta".traducido(languageManager.currentLanguage)) \(targetPuntos) \("puntos".traducido(languageManager.currentLanguage)).")
+                                .font(.custom("LilitaOne", size: 20))
+                                .foregroundColor(.black)
+                        }
+                        
+                        Button(action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Text("Return".traducido(languageManager.currentLanguage))
+                                .font(.custom("LilitaOne", size: 25))
+                                .foregroundColor(.white)
+                                .padding(.vertical, 12)
+                                .padding(.horizontal, 40)
+                                .background(playerWon ? Color(red: 76/255, green: 175/255, blue: 80/255) : Color(red: 90/255, green: 100/255, blue: 180/255))
+                                .cornerRadius(25)
+                        }
+                        .padding(.top, 10)
+                    }
+                    .padding(30)
+                    .background(Color.white)
+                    .cornerRadius(20)
+                    .shadow(radius: 20)
+                    .padding(.horizontal, 40)
+                    .transition(.scale)
+                }
             }
             .onAppear {
                 self.gameAreaSize = geo.size
@@ -164,6 +207,8 @@ struct JuegoView: View {
     }
     
     func iniciarNuevaRonda() {
+        guard !isGameFinished else { return }
+        
         self.alimentosEnPantalla = alimentoRepo.generarSetDeAlimentos(
             alergiasJugador: activeProfile.allergies,
             gameSize: self.gameAreaSize
@@ -173,7 +218,7 @@ struct JuegoView: View {
     }
     
     func manejarTickDelRound() {
-        guard sePuedeDisparar else { return }
+        guard !isGameFinished, sePuedeDisparar else { return }
         
         if roundTimeRemaining > 0 {
             roundTimeRemaining -= 1
@@ -182,7 +227,7 @@ struct JuegoView: View {
         if roundTimeRemaining == 0 {
             sePuedeDisparar = false
             puntos -= 5
-            mostrarMensaje(texto: "¡Muy lento! -5 Puntos")
+            // mostrarMensaje(texto: "¡Muy lento! -5 Puntos")
             
             checkGameState()
             
@@ -220,10 +265,10 @@ struct JuegoView: View {
         
         if alimento.isAlergenoParaJugador {
             puntos += 5
-            mostrarMensaje(texto: "+5 Puntos!")
+            mostrarMensaje(texto: "+5")
         } else {
             puntos -= 2
-            mostrarMensaje(texto: "-2 Puntos")
+            mostrarMensaje(texto: "-2")
         }
         
         checkGameState()
@@ -236,8 +281,19 @@ struct JuegoView: View {
     }
     
     func mostrarMensaje(texto: String) {
-        // ...
+        mensajePuntosTexto = texto
+        mostrarMensajePuntos = true
+        mensajePuntosOffset = 0
+        
+        withAnimation(.easeOut(duration: 1.0)) {
+            mensajePuntosOffset = -50
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            mostrarMensajePuntos = false
+        }
     }
+    
     func checkGameState() {
         guard !isGameFinished else { return }
 
@@ -254,19 +310,16 @@ struct JuegoView: View {
     func handleGameEnd(didWin: Bool) {
         sePuedeDisparar = false
         roundTimer.upstream.connect().cancel()
-
+        self.playerWon = didWin
+        
         if didWin {
-            mostrarMensaje(texto: "¡Nivel Completado!")
-            
             if nivelNumero == activeProfile.highestLevelUnlocked {
                 activeProfile.highestLevelUnlocked += 1
             }
-        } else {
-            mostrarMensaje(texto: "¡Inténtalo de nuevo!")
         }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            presentationMode.wrappedValue.dismiss()
+        
+        withAnimation {
+            showModal = true
         }
     }
 }
@@ -274,5 +327,6 @@ struct JuegoView: View {
 #Preview {
     JuegoView(nivelNumero: 1)
         .environmentObject(ActiveProfileManager())
+        .environmentObject(LanguageManager())
         .modelContainer(for: Profile.self)
-}
+}  

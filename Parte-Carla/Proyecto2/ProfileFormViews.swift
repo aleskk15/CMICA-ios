@@ -132,6 +132,7 @@ struct ProfileFormView_Step2: View {
     @Environment(\.modelContext) var context
     @EnvironmentObject var activeProfileManager: ActiveProfileManager
     @EnvironmentObject var languageManager: LanguageManager
+    @Query var existingProfiles: [Profile]
     
     var editingProfile: Profile?
     
@@ -146,6 +147,10 @@ struct ProfileFormView_Step2: View {
     @State private var allergies: [String] = [""]
     
     @State private var showingDeleteAlert = false
+    
+    @State private var showTermsModal = false
+    @State private var acceptedResponsibility = false
+    @State private var acceptedTerms = false
     
     let allAllergies: [String] = [
             "Proteínas de leche de vaca",
@@ -211,7 +216,18 @@ struct ProfileFormView_Step2: View {
     
     let buttonColor = Color(red: 238 / 255.0, green: 75 / 255.0, blue: 75 / 255.0)
     let textFieldBackgroundColor = Color.white.opacity(0.8)
-
+    let termsButtonColor = Color(red: 40/255, green: 60/255, blue: 100/255)
+    
+    var canProceed: Bool {
+        let fieldsValid = !realName.trimmingCharacters(in: .whitespaces).isEmpty
+            
+        if editingProfile != nil || !existingProfiles.isEmpty {
+            return fieldsValid
+        } else {
+            return fieldsValid && acceptedResponsibility && acceptedTerms
+        }
+    }
+    
     var body: some View {
         ZStack {
             Image("fondo")
@@ -266,6 +282,65 @@ struct ProfileFormView_Step2: View {
                             allergies: $allergies,
                             textFieldBackgroundColor: textFieldBackgroundColor
                         )
+                        
+                        if editingProfile == nil && existingProfiles.isEmpty {
+                            
+                            VStack(spacing: 20) {
+                                
+                                Button(action: {
+                                    showTermsModal = true
+                                    
+                                }) {
+                                    Text("terms_button".traducido(languageManager.currentLanguage))
+                                        .font(.custom("LilitaOne", size: 20))
+                                        .foregroundColor(.white)
+                                        .padding(.vertical, 12)
+                                        .padding(.horizontal, 20)
+                                        .background(termsButtonColor)
+                                        .cornerRadius(25)
+                                    
+                                }
+                                
+                                VStack(alignment: .leading, spacing: 15) {
+                                    HStack(alignment: .top, spacing: 15) {
+                                        Button(action: { acceptedResponsibility.toggle() }) {
+                                            Image(systemName: acceptedResponsibility ? "checkmark.square.fill" : "square")
+                                                .resizable()
+                                                .frame(width: 30, height: 30)
+                                                .foregroundColor(.black)
+                                            
+                                        }
+                                        
+                                        Text("terms_responsibility".traducido(languageManager.currentLanguage))
+                                            .font(.custom("LilitaOne", size: 16))
+                                            .foregroundColor(.black)
+                                            .multilineTextAlignment(.leading)
+                                            .fixedSize(horizontal: false, vertical: true)
+                                            .padding(.top, 4)
+                                        
+                                    }
+                                    
+                                    HStack(alignment: .top, spacing: 15) {
+                                        Button(action: { acceptedTerms.toggle() }) {
+                                            Image(systemName: acceptedTerms ? "checkmark.square.fill" : "square")
+                                                .resizable()
+                                                .frame(width: 30, height: 30)
+                                                .foregroundColor(.black)
+                                        }
+                                        
+                                        Text("terms_accept".traducido(languageManager.currentLanguage))
+                                            .font(.custom("LilitaOne", size: 16))
+                                            .foregroundColor(.black)
+                                            .multilineTextAlignment(.leading)
+                                            .padding(.top, 4)
+                                    }
+                                }
+                                .padding(.horizontal, 10)
+                            }
+                            .padding(.vertical, 15)
+                            .frame(maxWidth: .infinity)
+                            
+                        }
 
                         Button(action: {
                             saveProfile()
@@ -274,11 +349,14 @@ struct ProfileFormView_Step2: View {
                             Text(editingProfile == nil ? "Crear Perfil" : "Guardar Cambios")
                                 .font(.custom("LilitaOne",size:35)).fontWeight(.bold).foregroundColor(.white)
                                 .frame(maxWidth: .infinity, minHeight: 60)
-                                .background(buttonColor)
+                                .background(canProceed ? buttonColor : Color.gray)
+                                //.background(buttonColor)
                                 .cornerRadius(30)
                                 .shadow(radius: 5)
+                                .padding(.bottom, 60)
                         }
                         .disabled(realName.trimmingCharacters(in: .whitespaces).isEmpty)
+                        .disabled(!canProceed)
                         .padding(.top, 20)
                         
                         if editingProfile != nil {
@@ -312,6 +390,11 @@ struct ProfileFormView_Step2: View {
                 allergies = editingProfile.allergies.isEmpty ? [""] : editingProfile.allergies
             }
         }
+        .sheet(isPresented: $showTermsModal) {
+            TermsAndConditionsView()
+                .environmentObject(languageManager)
+        }
+        
         .alert(isPresented: $showingDeleteAlert) {
             Alert(
                 title: Text(LocalizedStringKey("Eliminar Perfil")),
